@@ -1,0 +1,146 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "padding": 12,
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#193a3a",
+      "titleColor": "#193a3a",
+      "domain": false,
+      "gridColor": "#e1e5dd",
+      "labelPadding": 6,
+      "titlePadding": 12
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleLimit": 300,
+      "labelLimit": 220,
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "titleFontWeight": "normal"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 14,
+      "color": "#193a3a"
+    }
+  },
+  "width": 500,
+  "height": 270,
+  "data": {
+    "values": [
+      {
+        "year": 2023,
+        "parent": "Year 11 or below",
+        "proficient": 31.294
+      },
+      {
+        "year": 2023,
+        "parent": "Bachelor or above",
+        "proficient": 80.674
+      },
+      {
+        "year": 2026,
+        "parent": "Year 11 or below",
+        "proficient": 29.2146
+      },
+      {
+        "year": 2026,
+        "parent": "Bachelor or above",
+        "proficient": 78.6846
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Assessment year",
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "proficient",
+      "type": "quantitative",
+      "title": "Strong or Exceeding (%)",
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      }
+    },
+    "color": {
+      "field": "parent",
+      "type": "nominal",
+      "title": "Highest parental education",
+      "scale": {
+        "domain": [
+          "Year 11 or below",
+          "Bachelor or above"
+        ],
+        "range": [
+          "#bd532c",
+          "#177b79"
+        ]
+      },
+      "legend": {
+        "columns": 1
+      }
+    },
+    "detail": {
+      "field": "parent"
+    },
+    "tooltip": [
+      {
+        "field": "parent",
+        "title": "Parental education"
+      },
+      {
+        "field": "year",
+        "title": "Year",
+        "format": "d"
+      },
+      {
+        "field": "proficient",
+        "title": "Strong or Exceeding (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "point": {
+          "filled": true,
+          "size": 90
+        },
+        "strokeWidth": 3
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -14,
+        "fontSize": 13,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "text": {
+          "field": "proficient",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ]
+}

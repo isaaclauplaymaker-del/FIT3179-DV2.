@@ -1,0 +1,172 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "padding": 12,
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#193a3a",
+      "titleColor": "#193a3a",
+      "domain": false,
+      "gridColor": "#e1e5dd",
+      "labelPadding": 6,
+      "titlePadding": 12
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleLimit": 300,
+      "labelLimit": 220,
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "titleFontWeight": "normal"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 14,
+      "color": "#193a3a"
+    }
+  },
+  "width": 400,
+  "height": 240,
+  "data": {
+    "values": [
+      {
+        "gradeLabel": "Year 3",
+        "domain": "Reading",
+        "support": 11.2595,
+        "label": "11.3%"
+      },
+      {
+        "gradeLabel": "Year 3",
+        "domain": "Numeracy",
+        "support": 10.9581,
+        "label": "11.0%"
+      },
+      {
+        "gradeLabel": "Year 5",
+        "domain": "Reading",
+        "support": 7.7261,
+        "label": "7.7%"
+      },
+      {
+        "gradeLabel": "Year 5",
+        "domain": "Numeracy",
+        "support": 7.6445,
+        "label": "7.6%"
+      },
+      {
+        "gradeLabel": "Year 7",
+        "domain": "Reading",
+        "support": 10.6781,
+        "label": "10.7%"
+      },
+      {
+        "gradeLabel": "Year 7",
+        "domain": "Numeracy",
+        "support": 8.9972,
+        "label": "9.0%"
+      },
+      {
+        "gradeLabel": "Year 9",
+        "domain": "Reading",
+        "support": 11.1142,
+        "label": "11.1%"
+      },
+      {
+        "gradeLabel": "Year 9",
+        "domain": "Numeracy",
+        "support": 10.9627,
+        "label": "11.0%"
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "domain",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Reading",
+        "Numeracy"
+      ],
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "gradeLabel",
+      "type": "ordinal",
+      "title": null,
+      "sort": [
+        "Year 3",
+        "Year 5",
+        "Year 7",
+        "Year 9"
+      ]
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#f6f3eb",
+        "strokeWidth": 4,
+        "cornerRadius": 3
+      },
+      "encoding": {
+        "color": {
+          "field": "support",
+          "type": "quantitative",
+          "title": "Needs additional support (%)",
+          "scale": {
+            "scheme": "oranges",
+            "domain": [
+              0,
+              15
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "gradeLabel",
+            "title": "Year level"
+          },
+          {
+            "field": "domain",
+            "title": "Subject"
+          },
+          {
+            "field": "support",
+            "title": "Needs additional support (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 18,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "text": {
+          "field": "label"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.support >= 10",
+            "value": "white"
+          },
+          "value": "#193a3a"
+        }
+      }
+    }
+  ]
+}

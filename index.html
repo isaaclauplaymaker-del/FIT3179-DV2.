@@ -16,6 +16,7 @@
 </head>
 
 <body>
+<a class="skip-link" href="#national-picture">Skip to the charts</a>
 <main>
     <header>
         <p class="eyebrow">EDUCATION IN AUSTRALIA · NAPLAN 2026</p>
@@ -24,23 +25,25 @@
         <h2>Who needs more support?</h2>
 
         <p class="lead">
-            National averages provide a starting point. Reading and
-            numeracy outcomes also vary across year levels, places
+            Where are support needs concentrated, and what do national averages hide?
+            Explore Australian reading and numeracy results across places, year levels
             and student backgrounds.
         </p>
-
-        <p>
-            NAPLAN is the National Assessment Program – Literacy and
-            Numeracy. It assesses students in Years 3, 5, 7 and 9.
-            This story examines Reading and Numeracy.
-        </p>
-
-        <p>
-            “Needs additional support” is an official proficiency
-            category. “Strong or Exceeding” combines the two highest
-            categories. Standards are specific to each subject and
-            year level.
-        </p>
+        <p class="audience-note">For Malaysian readers interested in Australian school education.</p>
+        <div class="why-it-matters">
+            <h3>Why these skills matter</h3>
+            <p>Literacy helps students understand information, evaluate ideas and communicate
+            across school subjects. Numeracy helps them apply mathematical knowledge to
+            quantities, measurements and data in everyday situations. Identifying gaps in
+            these skills helps teachers plan the next steps in learning.</p>
+            <p>This story uses Reading as one component of literacy; it does not measure
+            every literacy skill. Its question is where additional support may be needed,
+            rather than what causes the differences.</p>
+        </div>
+        <p>NAPLAN, the National Assessment Program – Literacy and Numeracy, assesses
+        students in Years 3, 5, 7 and 9. “Needs additional support” is an official proficiency
+        category. “Strong or Exceeding” combines the two highest categories. Standards
+        differ by subject and year level.</p>
     </header>
 
     <div class="explore-controls">
@@ -74,7 +77,8 @@
             </select>
         </div>
 
-        <p class="control-hint">Hover over marks for details.</p>
+        <button id="reset-filters" class="secondary-button" type="button">Reset filters</button>
+        <p class="control-hint">Hover for values. Click a state mark to follow it.</p>
     </div>
 
     <p class="filter-note">
@@ -84,15 +88,30 @@
         Trend charts retain the 2023–2026 comparison window.
     </p>
 
+    <aside class="follow-panel" aria-labelledby="follow-title">
+        <div class="follow-heading">
+            <div><h3 id="follow-title">Follow a state or territory</h3>
+            <p>Select one here or click a state mark in charts 3, 4, 7, 11 or 13.</p></div>
+            <div class="control"><label for="follow-state">STATE OR TERRITORY</label>
+            <select id="follow-state"><option value="All states">All states</option>
+            <option>New South Wales</option><option>Victoria</option><option>Queensland</option>
+            <option>South Australia</option><option>Western Australia</option><option>Tasmania</option>
+            <option>Northern Territory</option><option>Australian Capital Territory</option></select></div>
+        </div>
+        <p id="state-summary" class="state-summary" role="status" aria-live="polite">All states are shown.</p>
+        <p class="follow-hint">The selection stays highlighted across the related charts.
+        The box plot keeps every reported jurisdiction; Tasmania is excluded from the ordering chart throughout.</p>
+    </aside>
+
     <p id="page-status" role="status">Loading 14 charts…</p>
 
     <noscript>
         <p>Please enable JavaScript to view the charts.</p>
     </noscript>
 
-    <section>
+    <section id="national-picture">
         <p class="eyebrow">01 / THE NATIONAL PICTURE</p>
-        <h2>Start with the national results</h2>
+        <h2>How common are support needs?</h2>
 
         <p class="section-intro">
             Compare the share needing additional support, then
@@ -130,12 +149,12 @@
 
     <section>
         <p class="eyebrow">02 / DIFFERENCES ACROSS AUSTRALIA</p>
-        <h2>Place, proportion and population</h2>
+        <h2>A percentage and a population tell different stories</h2>
 
         <p class="section-intro">
             A high support percentage and a large student population
             answer different questions. These views distinguish
-            achievement percentages from population counts.
+            achievement percentages from population counts. NSW is New South Wales; VIC is Victoria; QLD is Queensland; SA is South Australia; WA is Western Australia; TAS is Tasmania; NT is Northern Territory; ACT is Australian Capital Territory.
         </p>
 
         <div class="chart-grid">
@@ -210,12 +229,11 @@
 
     <section>
         <p class="eyebrow">03 / STUDENT GROUPS</p>
-        <h2>Look beyond the state average</h2>
+        <h2>Which differences do averages hide?</h2>
 
         <p class="section-intro">
             Remoteness and student backgrounds provide further views
-            of the results. These comparisons describe associations
-            and cannot establish their causes.
+            of the results. The next comparisons ask whether patterns remain hidden inside state averages. They describe associations, not causes.
         </p>
 
         <div class="chart-grid">
@@ -261,7 +279,7 @@
 
     <section>
         <p class="eyebrow">04 / PARTICIPATION AND CHANGE</p>
-        <h2>Who is represented, and what has changed?</h2>
+        <h2>Read change alongside participation</h2>
 
         <p class="section-intro">
             Participation helps explain the coverage of an assessment.
@@ -295,7 +313,7 @@
                 </p>
             </article>
 
-            <article>
+            <article class="wide-chart">
                 <p class="chart-number">CHART 13 · BUMP CHART</p>
                 <h3>How has jurisdiction ordering changed?</h3>
                 <p class="chart-subtitle"></p>
@@ -379,18 +397,42 @@
             Small islands and Other Territories are omitted.
         </p>
 
+        <p>Background: the Australian Curriculum explanations of
+            <a href="https://www.australiancurriculum.edu.au/curriculum-information/understand-this-general-capability/literacy" target="_blank" rel="noopener noreferrer">Literacy</a> and
+            <a href="https://www.australiancurriculum.edu.au/curriculum-information/understand-this-general-capability/numeracy" target="_blank" rel="noopener noreferrer">Numeracy</a>
+            describe their application across learning areas and everyday contexts.</p>
+        <details class="specifications"><summary>Readable chart specifications</summary>
+            <p>These JSON files describe the default view: 2026, Year 9, Reading,
+            with all states shown. The live controls update the same chart definitions.</p>
+            <ul id="chart-spec-links">
+                <li><a href="charts/01-national-chart.vg.json">Chart 1: national chart</a></li>
+                <li><a href="charts/02-proficiency-chart.vg.json">Chart 2: proficiency chart</a></li>
+                <li><a href="charts/03-state-map.vg.json">Chart 3: state map</a></li>
+                <li><a href="charts/04-participant-map.vg.json">Chart 4: participant map</a></li>
+                <li><a href="charts/05-enrolment-cartogram.vg.json">Chart 5: enrolment cartogram</a></li>
+                <li><a href="charts/06-sector-treemap.vg.json">Chart 6: sector treemap</a></li>
+                <li><a href="charts/07-state-distribution.vg.json">Chart 7: state distribution</a></li>
+                <li><a href="charts/08-remoteness-chart.vg.json">Chart 8: remoteness chart</a></li>
+                <li><a href="charts/09-gender-chart.vg.json">Chart 9: gender chart</a></li>
+                <li><a href="charts/10-parent-chart.vg.json">Chart 10: parent chart</a></li>
+                <li><a href="charts/11-participation-chart.vg.json">Chart 11: participation chart</a></li>
+                <li><a href="charts/12-trend-chart.vg.json">Chart 12: trend chart</a></li>
+                <li><a href="charts/13-bump-chart.vg.json">Chart 13: bump chart</a></li>
+                <li><a href="charts/14-education-slope.vg.json">Chart 14: education slope</a></li>
+            </ul>
+        </details>
         <p>
             Suppressed achievement remains missing, not zero.
             Tasmania's 2026 achievement is suppressed because of
             low participation. Original state reporting flags are
             retained. NAPLAN achievement before 2023 is not directly
             comparable with the measurement series beginning in 2023.
-            Sources accessed 15 October 2026.
+            Data sources accessed 15 October 2026; curriculum background checked 16 October 2026.
         </p>
     </section>
 
     <footer>
-        <p>Isaac Lau · FIT3179 Data Visualisation 2 · 15 October 2026</p>
+        <p>Isaac Lau · FIT3179 Data Visualisation 2 · Updated 16 October 2026</p>
         <p>
             AI acknowledgement: OpenAI ChatGPT assisted with planning,
             source checking, data preparation, code, debugging and

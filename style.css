@@ -311,3 +311,27 @@ footer p {
         width: 100%;
     }
 }
+/* Narrative and accessible linked-state controls. */
+.why-it-matters{margin:26px 0;padding:22px 24px;background:#e8eee3;border-left:3px solid var(--teal)}
+.why-it-matters h3{font-family:Georgia,serif;font-size:24px;font-weight:normal}
+.why-it-matters p:last-child{margin-bottom:0}
+.audience-note{font-size:13px;color:var(--muted)}
+.follow-panel{margin:20px 0 26px;padding:20px 24px;border:1px solid var(--rule);background:#edf0e8}
+.follow-heading{display:flex;align-items:center;gap:24px;justify-content:space-between}
+.follow-heading p,.follow-hint{font-size:13px;color:var(--muted);margin-bottom:0}
+.follow-heading select{max-width:100%;min-width:220px}
+.state-summary{font-size:17px;margin:16px 0 8px;max-width:920px}
+.secondary-button{padding:10px 15px;border:1px solid var(--teal);border-radius:3px;background:var(--paper);color:var(--ink);font:14px Arial;cursor:pointer}
+.secondary-button:hover{background:#dce8df}
+button:focus-visible,summary:focus-visible{outline:3px solid #bd532c;outline-offset:3px}
+button:disabled{opacity:.6;cursor:wait}
+.chart-grid>.wide-chart{grid-column:1/-1}
+.wide-chart .chart{max-width:100%}
+.chart-subtitle{font-size:13px}
+.source{font-size:13px}
+.specifications{margin:24px 0;font-size:13px}
+.specifications ul{columns:2;line-height:2}
+.skip-link{position:absolute;top:-100px;left:18px;padding:10px;background:var(--paper);z-index:10}
+.skip-link:focus{top:10px}
+@media(max-width:650px){.follow-heading{display:block}.follow-heading .control{margin-top:16px}.follow-panel{padding:18px}.specifications ul{columns:1}}
+@media print{.explore-controls,.follow-panel,.skip-link{display:none}}

@@ -1,0 +1,197 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "padding": 12,
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#193a3a",
+      "titleColor": "#193a3a",
+      "domain": false,
+      "gridColor": "#e1e5dd",
+      "labelPadding": 6,
+      "titlePadding": 12
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleLimit": 300,
+      "labelLimit": 220,
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "titleFontWeight": "normal"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 14,
+      "color": "#193a3a"
+    }
+  },
+  "width": 660,
+  "height": 180,
+  "data": {
+    "values": [
+      {
+        "state": "New South Wales",
+        "domain": "Reading",
+        "support": 10.8404
+      },
+      {
+        "state": "New South Wales",
+        "domain": "Numeracy",
+        "support": 9.857
+      },
+      {
+        "state": "Victoria",
+        "domain": "Reading",
+        "support": 7.9366
+      },
+      {
+        "state": "Victoria",
+        "domain": "Numeracy",
+        "support": 8.3305
+      },
+      {
+        "state": "Queensland",
+        "domain": "Reading",
+        "support": 15.1393
+      },
+      {
+        "state": "Queensland",
+        "domain": "Numeracy",
+        "support": 15.0957
+      },
+      {
+        "state": "South Australia",
+        "domain": "Reading",
+        "support": 13.421
+      },
+      {
+        "state": "South Australia",
+        "domain": "Numeracy",
+        "support": 13.3488
+      },
+      {
+        "state": "Western Australia",
+        "domain": "Reading",
+        "support": 7.4789
+      },
+      {
+        "state": "Western Australia",
+        "domain": "Numeracy",
+        "support": 7.9564
+      },
+      {
+        "state": "Northern Territory",
+        "domain": "Reading",
+        "support": 33.2477
+      },
+      {
+        "state": "Northern Territory",
+        "domain": "Numeracy",
+        "support": 34.632
+      },
+      {
+        "state": "Australian Capital Territory",
+        "domain": "Reading",
+        "support": 8.57
+      },
+      {
+        "state": "Australian Capital Territory",
+        "domain": "Numeracy",
+        "support": 8.8816
+      }
+    ]
+  },
+  "encoding": {
+    "y": {
+      "field": "domain",
+      "type": "nominal",
+      "title": null
+    },
+    "x": {
+      "field": "support",
+      "type": "quantitative",
+      "title": "Needs additional support (%)",
+      "scale": {
+        "domain": [
+          0,
+          60
+        ]
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "boxplot",
+        "extent": "min-max",
+        "size": 32,
+        "median": {
+          "color": "white"
+        },
+        "box": {
+          "fill": "#177b79",
+          "opacity": 0.65
+        },
+        "rule": {
+          "color": "#708d80"
+        },
+        "ticks": {
+          "color": "#708d80"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 45,
+        "color": "#193a3a",
+        "opacity": 0.75
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "state",
+            "title": "State / territory"
+          },
+          {
+            "field": "domain",
+            "title": "Subject"
+          },
+          {
+            "field": "support",
+            "title": "Needs additional support (%)",
+            "format": ".1f"
+          }
+        ],
+        "opacity": {
+          "condition": {
+            "test": "focus_state === 'All states' || datum.state === focus_state",
+            "value": 1
+          },
+          "value": 0.2
+        },
+        "size": {
+          "condition": {
+            "test": "datum.state === focus_state",
+            "value": 120
+          },
+          "value": 45
+        }
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "focus_state",
+      "value": "All states"
+    }
+  ]
+}

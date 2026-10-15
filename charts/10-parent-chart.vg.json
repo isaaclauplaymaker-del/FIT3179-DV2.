@@ -1,0 +1,488 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "padding": 12,
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": "normal",
+      "labelColor": "#193a3a",
+      "titleColor": "#193a3a",
+      "domain": false,
+      "gridColor": "#e1e5dd",
+      "labelPadding": 6,
+      "titlePadding": 12
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleLimit": 300,
+      "labelLimit": 220,
+      "labelFontSize": 13,
+      "titleFontSize": 11,
+      "titleFontWeight": "normal"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 14,
+      "color": "#193a3a"
+    }
+  },
+  "width": 740,
+  "height": 320,
+  "params": [
+    {
+      "name": "parent_subject",
+      "value": "Reading"
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "dimension": "Needs support"
+          },
+          {
+            "dimension": "Developing"
+          },
+          {
+            "dimension": "Strong"
+          },
+          {
+            "dimension": "Exceeding"
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#becbc0"
+      },
+      "encoding": {
+        "x": {
+          "field": "dimension",
+          "type": "ordinal",
+          "sort": [
+            "Needs support",
+            "Developing",
+            "Strong",
+            "Exceeding"
+          ],
+          "title": null,
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 11
+          }
+        },
+        "y": {
+          "datum": 0,
+          "type": "quantitative",
+          "title": "Share in each proficiency category (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          }
+        },
+        "y2": {
+          "datum": 100
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "domain": "Reading",
+            "parent": "Year 11 or below",
+            "dimension": "Needs support",
+            "axis": 0,
+            "value": 30.0495
+          },
+          {
+            "domain": "Reading",
+            "parent": "Year 11 or below",
+            "dimension": "Developing",
+            "axis": 1,
+            "value": 35.5167
+          },
+          {
+            "domain": "Reading",
+            "parent": "Year 11 or below",
+            "dimension": "Strong",
+            "axis": 2,
+            "value": 26.4465
+          },
+          {
+            "domain": "Reading",
+            "parent": "Year 11 or below",
+            "dimension": "Exceeding",
+            "axis": 3,
+            "value": 2.7681
+          },
+          {
+            "domain": "Reading",
+            "parent": "Year 12",
+            "dimension": "Needs support",
+            "axis": 0,
+            "value": 17.4216
+          },
+          {
+            "domain": "Reading",
+            "parent": "Year 12",
+            "dimension": "Developing",
+            "axis": 1,
+            "value": 33.0425
+          },
+          {
+            "domain": "Reading",
+            "parent": "Year 12",
+            "dimension": "Strong",
+            "axis": 2,
+            "value": 39.0105
+          },
+          {
+            "domain": "Reading",
+            "parent": "Year 12",
+            "dimension": "Exceeding",
+            "axis": 3,
+            "value": 7.6033
+          },
+          {
+            "domain": "Reading",
+            "parent": "Certificate",
+            "dimension": "Needs support",
+            "axis": 0,
+            "value": 17.1089
+          },
+          {
+            "domain": "Reading",
+            "parent": "Certificate",
+            "dimension": "Developing",
+            "axis": 1,
+            "value": 34.9264
+          },
+          {
+            "domain": "Reading",
+            "parent": "Certificate",
+            "dimension": "Strong",
+            "axis": 2,
+            "value": 40.0135
+          },
+          {
+            "domain": "Reading",
+            "parent": "Certificate",
+            "dimension": "Exceeding",
+            "axis": 3,
+            "value": 5.9633
+          },
+          {
+            "domain": "Reading",
+            "parent": "Diploma",
+            "dimension": "Needs support",
+            "axis": 0,
+            "value": 11.6504
+          },
+          {
+            "domain": "Reading",
+            "parent": "Diploma",
+            "dimension": "Developing",
+            "axis": 1,
+            "value": 30.0374
+          },
+          {
+            "domain": "Reading",
+            "parent": "Diploma",
+            "dimension": "Strong",
+            "axis": 2,
+            "value": 47.0409
+          },
+          {
+            "domain": "Reading",
+            "parent": "Diploma",
+            "dimension": "Exceeding",
+            "axis": 3,
+            "value": 9.7368
+          },
+          {
+            "domain": "Reading",
+            "parent": "Bachelor or above",
+            "dimension": "Needs support",
+            "axis": 0,
+            "value": 4.0536
+          },
+          {
+            "domain": "Reading",
+            "parent": "Bachelor or above",
+            "dimension": "Developing",
+            "axis": 1,
+            "value": 16.2714
+          },
+          {
+            "domain": "Reading",
+            "parent": "Bachelor or above",
+            "dimension": "Strong",
+            "axis": 2,
+            "value": 52.1068
+          },
+          {
+            "domain": "Reading",
+            "parent": "Bachelor or above",
+            "dimension": "Exceeding",
+            "axis": 3,
+            "value": 26.5778
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Year 11 or below",
+            "dimension": "Needs support",
+            "axis": 0,
+            "value": 30.7855
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Year 11 or below",
+            "dimension": "Developing",
+            "axis": 1,
+            "value": 32.74
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Year 11 or below",
+            "dimension": "Strong",
+            "axis": 2,
+            "value": 29.4734
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Year 11 or below",
+            "dimension": "Exceeding",
+            "axis": 3,
+            "value": 1.79
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Year 12",
+            "dimension": "Needs support",
+            "axis": 0,
+            "value": 17.2455
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Year 12",
+            "dimension": "Developing",
+            "axis": 1,
+            "value": 29.1117
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Year 12",
+            "dimension": "Strong",
+            "axis": 2,
+            "value": 45.0726
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Year 12",
+            "dimension": "Exceeding",
+            "axis": 3,
+            "value": 5.6478
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Certificate",
+            "dimension": "Needs support",
+            "axis": 0,
+            "value": 17.3318
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Certificate",
+            "dimension": "Developing",
+            "axis": 1,
+            "value": 31.6252
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Certificate",
+            "dimension": "Strong",
+            "axis": 2,
+            "value": 45.3189
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Certificate",
+            "dimension": "Exceeding",
+            "axis": 3,
+            "value": 3.7334
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Diploma",
+            "dimension": "Needs support",
+            "axis": 0,
+            "value": 11.3711
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Diploma",
+            "dimension": "Developing",
+            "axis": 1,
+            "value": 27.0395
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Diploma",
+            "dimension": "Strong",
+            "axis": 2,
+            "value": 53.1147
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Diploma",
+            "dimension": "Exceeding",
+            "axis": 3,
+            "value": 6.9464
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Bachelor or above",
+            "dimension": "Needs support",
+            "axis": 0,
+            "value": 3.5636
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Bachelor or above",
+            "dimension": "Developing",
+            "axis": 1,
+            "value": 13.2657
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Bachelor or above",
+            "dimension": "Strong",
+            "axis": 2,
+            "value": 59.7297
+          },
+          {
+            "domain": "Numeracy",
+            "parent": "Bachelor or above",
+            "dimension": "Exceeding",
+            "axis": 3,
+            "value": 22.4525
+          }
+        ]
+      },
+      "transform": [
+        {
+          "filter": "datum.domain === parent_subject"
+        }
+      ],
+      "params": [
+        {
+          "name": "parent_focus",
+          "select": {
+            "type": "point",
+            "fields": [
+              "parent"
+            ]
+          },
+          "bind": "legend"
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "point": {
+          "filled": true,
+          "size": 60
+        },
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "x": {
+          "field": "dimension",
+          "type": "ordinal",
+          "sort": [
+            "Needs support",
+            "Developing",
+            "Strong",
+            "Exceeding"
+          ],
+          "title": null
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "Share in each proficiency category (%)",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "axis": {
+            "labelExpr": "datum.value + '%'"
+          }
+        },
+        "order": {
+          "field": "axis"
+        },
+        "detail": {
+          "field": "parent"
+        },
+        "color": {
+          "field": "parent",
+          "type": "nominal",
+          "title": "Highest parental education",
+          "legend": {
+            "columns": 2
+          },
+          "scale": {
+            "domain": [
+              "Year 11 or below",
+              "Year 12",
+              "Certificate",
+              "Diploma",
+              "Bachelor or above"
+            ],
+            "range": [
+              "#b94b2c",
+              "#d68f58",
+              "#b69c38",
+              "#609a88",
+              "#166665"
+            ]
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "parent_focus",
+            "value": 1
+          },
+          "value": 0.15
+        },
+        "tooltip": [
+          {
+            "field": "parent",
+            "title": "Parental education"
+          },
+          {
+            "field": "dimension",
+            "title": "Proficiency category"
+          },
+          {
+            "field": "value",
+            "title": "Share (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ]
+}

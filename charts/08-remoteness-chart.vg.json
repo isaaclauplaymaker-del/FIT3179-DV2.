@@ -1,0 +1,201 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "padding": 12,
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#193a3a",
+      "titleColor": "#193a3a",
+      "domain": false,
+      "gridColor": "#e1e5dd",
+      "labelPadding": 6,
+      "titlePadding": 12
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleLimit": 300,
+      "labelLimit": 220,
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "titleFontWeight": "normal"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 14,
+      "color": "#193a3a"
+    }
+  },
+  "width": 420,
+  "height": 270,
+  "data": {
+    "values": [
+      {
+        "domain": "Reading",
+        "subgroup": "Major cities",
+        "support": 8.8929
+      },
+      {
+        "domain": "Reading",
+        "subgroup": "Inner regional",
+        "support": 15.0748
+      },
+      {
+        "domain": "Reading",
+        "subgroup": "Outer regional",
+        "support": 18.6629
+      },
+      {
+        "domain": "Reading",
+        "subgroup": "Remote",
+        "support": 26.2127
+      },
+      {
+        "domain": "Reading",
+        "subgroup": "Very remote",
+        "support": 52.7505
+      },
+      {
+        "domain": "Numeracy",
+        "subgroup": "Major cities",
+        "support": 8.7362
+      },
+      {
+        "domain": "Numeracy",
+        "subgroup": "Inner regional",
+        "support": 14.6411
+      },
+      {
+        "domain": "Numeracy",
+        "subgroup": "Outer regional",
+        "support": 18.8501
+      },
+      {
+        "domain": "Numeracy",
+        "subgroup": "Remote",
+        "support": 28.3639
+      },
+      {
+        "domain": "Numeracy",
+        "subgroup": "Very remote",
+        "support": 53.3792
+      }
+    ]
+  },
+  "encoding": {
+    "y": {
+      "field": "subgroup",
+      "type": "ordinal",
+      "title": null,
+      "sort": [
+        "Major cities",
+        "Inner regional",
+        "Outer regional",
+        "Remote",
+        "Very remote"
+      ]
+    }
+  },
+  "layer": [
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "min",
+              "field": "support",
+              "as": "lo"
+            },
+            {
+              "op": "max",
+              "field": "support",
+              "as": "hi"
+            }
+          ],
+          "groupby": [
+            "subgroup"
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "stroke": "#b2c3ba",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "lo",
+          "type": "quantitative",
+          "title": "Needs additional support (%)",
+          "scale": {
+            "domain": [
+              0,
+              70
+            ]
+          }
+        },
+        "x2": {
+          "field": "hi"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 110
+      },
+      "encoding": {
+        "x": {
+          "field": "support",
+          "type": "quantitative",
+          "title": "Needs additional support (%)",
+          "scale": {
+            "domain": [
+              0,
+              70
+            ]
+          }
+        },
+        "color": {
+          "field": "domain",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Reading",
+              "Numeracy"
+            ],
+            "range": [
+              "#177b79",
+              "#bd532c"
+            ]
+          },
+          "legend": {
+            "title": null
+          }
+        },
+        "tooltip": [
+          {
+            "field": "subgroup",
+            "title": "Remoteness"
+          },
+          {
+            "field": "domain",
+            "title": "Subject"
+          },
+          {
+            "field": "support",
+            "title": "Needs additional support (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ]
+}

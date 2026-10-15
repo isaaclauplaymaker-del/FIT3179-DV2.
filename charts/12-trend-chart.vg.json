@@ -1,0 +1,147 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "padding": 12,
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#193a3a",
+      "titleColor": "#193a3a",
+      "domain": false,
+      "gridColor": "#e1e5dd",
+      "labelPadding": 6,
+      "titlePadding": 12
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleLimit": 300,
+      "labelLimit": 220,
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "titleFontWeight": "normal"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 14,
+      "color": "#193a3a"
+    }
+  },
+  "width": 500,
+  "height": 260,
+  "data": {
+    "values": [
+      {
+        "year": 2023,
+        "subject": "Reading",
+        "support": 10.6456
+      },
+      {
+        "year": 2023,
+        "subject": "Numeracy",
+        "support": 10.2009
+      },
+      {
+        "year": 2024,
+        "subject": "Reading",
+        "support": 11.077
+      },
+      {
+        "year": 2024,
+        "subject": "Numeracy",
+        "support": 10.3505
+      },
+      {
+        "year": 2025,
+        "subject": "Reading",
+        "support": 9.8372
+      },
+      {
+        "year": 2025,
+        "subject": "Numeracy",
+        "support": 10.2094
+      },
+      {
+        "year": 2026,
+        "subject": "Reading",
+        "support": 11.1142
+      },
+      {
+        "year": 2026,
+        "subject": "Numeracy",
+        "support": 10.9627
+      }
+    ]
+  },
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 70
+    },
+    "strokeWidth": 2.5
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": "Assessment year",
+      "axis": {
+        "format": "d",
+        "values": [
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      }
+    },
+    "y": {
+      "field": "support",
+      "type": "quantitative",
+      "title": "Needs additional support (%)",
+      "scale": {
+        "domain": [
+          0,
+          20
+        ]
+      }
+    },
+    "color": {
+      "field": "subject",
+      "type": "nominal",
+      "title": null,
+      "scale": {
+        "domain": [
+          "Reading",
+          "Numeracy"
+        ],
+        "range": [
+          "#177b79",
+          "#bd532c"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "title": "Year",
+        "format": "d"
+      },
+      {
+        "field": "subject",
+        "title": "Subject"
+      },
+      {
+        "field": "support",
+        "title": "Needs additional support (%)",
+        "format": ".1f"
+      }
+    ]
+  }
+}

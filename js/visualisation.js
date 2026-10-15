@@ -1427,6 +1427,36 @@ const charts = [
     ["education-slope", chart14]
 ];
 
+// Linked focus changes appearance, never the underlying jurisdiction distribution.
+let selectedState = "All states";
+const linkedChartIds = ["state-map", "participant-map", "state-distribution", "participation-chart", "bump-chart"];
+const focusTest = "focus_state === 'All states' || datum.state === focus_state";
+for (const spec of [chart3, chart4, chart7, chart11, chart13]) {
+    spec.params = [...(spec.params || []), {name: "focus_state", value: "All states"}];
+}
+chart3.layer[0].encoding.opacity = {condition: {test: "focus_state === 'All states' || datum.properties.STATE_NAME === focus_state", value: 1}, value: 0.35};
+chart3.layer[0].encoding.stroke = {condition: {test: "datum.properties.STATE_NAME === focus_state", value: "#193a3a"}, value: "#f6f3eb"};
+chart3.layer[0].encoding.strokeWidth = {condition: {test: "datum.properties.STATE_NAME === focus_state", value: 3}, value: 1.2};
+chart4.layer[1].encoding.opacity = {condition: {test: focusTest, value: 0.85}, value: 0.18};
+chart7.layer[1].encoding.opacity = {condition: {test: focusTest, value: 1}, value: 0.2};
+chart7.layer[1].encoding.size = {condition: {test: "datum.state === focus_state", value: 120}, value: 45};
+chart11.layer[1].encoding.opacity = {condition: {test: focusTest, value: 1}, value: 0.25};
+chart13.encoding.opacity = {condition: {test: focusTest, value: 1}, value: 0.16};
+chart13.encoding.strokeWidth = {condition: {test: "datum.state === focus_state", value: 4}, value: 2.5};
+chart7.width = 660;
+chart10.width = 740;
+chart10.height = 320;
+chart13.width = 740;
+for (const spec of [chart10, chart13]) {
+    spec.config = {...config, axis: {...config.axis, labelFontSize: 13, titleFontSize: 13}, legend: {...config.legend, labelFontSize: 13}};
+}
+// Keep endpoint values visible in the slope view, including the single-year baseline.
+chart14.layer = [
+    {mark: chart14.mark},
+    {mark: {type: "text", dy: -14, fontSize: 13, fontWeight: "bold"}, encoding: {text: {field: "proficient", type: "quantitative", format: ".1f"}}}
+];
+delete chart14.mark;
+
 function block(year, grade, subject) {
     return FILTER_DATA[year + "-" + grade + "-" + subject];
 }
@@ -1440,6 +1470,9 @@ function replaceRows(target, rows) {
 // ==================================================
 
 function prepareCharts(year, grade, subject) {
+    for (const spec of [chart3, chart4, chart7, chart11, chart13]) {
+        spec.params.find(p => p.name === "focus_state").value = selectedState;
+    }
     // Chart 1: all year levels and both subjects.
 
     replaceRows(
@@ -1659,40 +1692,34 @@ function updateText(year, grade, subject) {
     const gap = b.ends[1] - b.ends[0];
     const initial = block(2023, grade, subject).ends;
 
+    const rStrong = r.national[2] + r.national[3];
+    const nStrong = n.national[2] + n.national[3];
+    const sorted = validStates.slice().sort((a,d) => a[supportField] - d[supportField]);
+    const largestPopulation = stateData.reduce((a,d) => d[subject.toLowerCase()+"_participants"] > a[subject.toLowerCase()+"_participants"] ? d : a);
+    const firstTrend = subjects.map(s => block(2023,grade,s).national[0]);
+    const lastTrend = subjects.map(s => block(2026,grade,s).national[0]);
+    const change = d => Math.abs(d) < 0.00005 ? "unchanged" : `${d > 0 ? "up" : "down"} ${f(Math.abs(d))} percentage points`;
+    const baselineOrder = stateData.map((d,i) => ({state:d.state, value:block(2023,grade,subject).states[i][0]})).filter(d => d.state !== "Tasmania").sort((a,b)=>a.value-b.value);
+    const finalOrder = stateData.map((d,i) => ({state:d.state, value:block(2026,grade,subject).states[i][0]})).filter(d => d.state !== "Tasmania").sort((a,b)=>a.value-b.value);
+    const moved = finalOrder.filter((d,i) => baselineOrder[i].state !== d.state).length;
+    const belowReference = b.states.filter(d => d[2] < b.national[6]).length;
     const notes = [
-        `Lowest reported support shares: ${lowest}. Darker cells mean higher percentages. Different year levels represent different student groups.`,
-
-        `Needs additional support: Reading ${f(r.national[0])}%; Numeracy ${f(n.national[0])}%. Developing is a separate category. Exempt is shown separately; source totals are not normalised.`,
-
-        `${highest.state} has the highest reported support share for this selection (${f(highest[supportField])}%). ${
-            year === 2026
-                ? "Tasmania is grey because achievement is suppressed; grey does not mean zero."
-                : "Hover for percentages and source reporting flags."
-        }`,
-
-        "Circle area represents NAPLAN participants: assessed + non-attempt + exempt. These counts answer a different question from the percentages in chart 3.",
-
-        "Circle area represents all school enrolments in 2025. Circles are displaced while preserving approximate geography. These are not NAPLAN participant counts.",
-
-        "The rectangles partition 4,160,918 enrolments: 62.8% Government, 20.0% Catholic and 17.2% Independent. Sector size does not measure sector performance.",
-
-        "Each point is a jurisdiction. The box covers the middle half, the white line is the median, and whiskers show the minimum and maximum. Jurisdictions have equal weight; this is not a distribution of student scores.",
-
-        `Reading support is ${f(r.remote[0])}% in major cities and ${f(r.remote[4])}% in very remote areas. Compare both subjects across remoteness; this does not establish a causal effect.`,
-
-        "Female percentage minus male percentage in Strong or Exceeding. Right of zero means a higher female share; left means a higher male share. Differences are in percentage points, not percent change.",
-
-        "Each vertical axis is a separate proficiency-category percentage on the same scale. Lines do not show time or student movement. Exempt and Not stated are omitted without normalising. Click legend labels to focus on groups.",
-
-        `Teal bars show participation; the orange tick marks the national reference (${f(b.national[6])}%). The pale bar extends to 100%. Low participation can affect how representative achievement results are.`,
-
-        "These are national support percentages for successive annual cohorts. The measurement series resets in 2023, so earlier achievement is not joined to it. These lines do not follow the same students.",
-
-        "The ordering is based on reported support percentages, with 1 representing the lowest. It does not show the size or statistical significance of differences. Tasmania is excluded in all four years to keep the jurisdiction set consistent.",
-
+        `The lowest reported support share occurs in ${lowest}. The differences are between year-level cohorts, not the progress of the same students. Darker cells indicate higher percentages.`,
+        `In Year ${grade}, ${f(rStrong)}% are Strong or Exceeding in Reading and ${f(nStrong)}% in Numeracy. Needs additional support accounts for ${f(r.national[0])}% and ${f(n.national[0])}% respectively. Subject standards differ; Developing and Exempt remain separate categories.`,
+        `Reported ${subject} support shares range from ${f(sorted[0][supportField])}% in ${sorted[0].state} to ${f(highest[supportField])}% in ${highest.state}. ${year === 2026 ? "Tasmania is grey because achievement is suppressed; it is not zero." : "The fixed colour scale makes the maps comparable across selections."} Click a state to follow it.`,
+        `${largestPopulation.state} has the largest participant count for this selection (${largestPopulation[subject.toLowerCase()+"_participants"].toLocaleString("en-AU")}). Circle area shows counts, whereas chart 3 shows percentages. Participants include assessed, non-attempt and exempt students.`,
+        "NSW and Victoria together account for 55.8% of all Australian school enrolments in 2025. Circle area replaces land area to show population size. This wider school population is context, not the selected NAPLAN cohort.",
+        "Government schools account for 62.8% of the 4,160,918 enrolments, followed by Catholic (20.0%) and Independent (17.2%) schools. The treemap describes the system's structure, not differences in sector performance.",
+        `Across the ${sorted.length} reported jurisdictions, ${subject} support shares span ${f(sorted[0][supportField])}% to ${f(highest[supportField])}%. Each jurisdiction has equal weight. The box covers the middle half; its white line is the median and whiskers show the minimum and maximum. Following a state highlights its point without changing this distribution.`,
+        `Reading support is ${f(r.remote[0])}% in major cities and ${f(r.remote[4])}% in very remote areas, a difference of ${f(r.remote[4]-r.remote[0])} percentage points. Compare the two subjects within each row. This association does not establish that remoteness causes the difference.`,
+        `In Year ${grade}, the female-minus-male difference in Strong or Exceeding is ${f(r.gap)} percentage points for Reading and ${f(n.gap)} for Numeracy. Right of zero means a higher female share; left means a higher male share. These observed differences are not a statistical significance test.`,
+        `For ${subject}, ${f(b.parents[0][0])}% need support in the Year 11-or-below parental-education group, compared with ${f(b.parents[4][0])}% in the Bachelor-or-above group. Each axis is a different category percentage, not time or student movement. Exempt and Not stated are omitted without normalising; click the legend to focus on profiles.`,
+        `${belowReference} of eight jurisdictions have participation below the national reference of ${f(b.national[6])}%. The orange tick is that reference and teal bars show state participation. Coverage matters when interpreting achievement; no causal effect is established.`,
+        `From 2023 to 2026, Year ${grade} Reading support moves from ${f(firstTrend[0])}% to ${f(lastTrend[0])}% (${change(lastTrend[0]-firstTrend[0])}); Numeracy moves from ${f(firstTrend[1])}% to ${f(lastTrend[1])}% (${change(lastTrend[1]-firstTrend[1])}). These are different annual cohorts within the series reset in 2023.`,
+        `${moved === 0 ? "The same jurisdictions occupy each endpoint position in 2023 and 2026." : `${moved} of seven jurisdictions occupy a different position in 2026 than in 2023.`} Ordering does not show the size or significance of differences; use the percentages in the tooltip. Tasmania is excluded throughout to keep the set consistent.`,
         year === 2023
-            ? `The 2023 baseline gap between these groups is ${f(gap)} percentage points. Select a later assessment year for an endpoint comparison.`
-            : `The gap between these two groups is ${f(initial[1] - initial[0])} percentage points in 2023 and ${f(gap)} in ${year}. These are group associations across different cohorts, not a causal effect of parental education.`
+            ? `The baseline gap is ${f(gap)} percentage points: ${f(b.ends[0])}% Strong or Exceeding in the Year 11-or-below parental-education group and ${f(b.ends[1])}% in the Bachelor-or-above group. Select a later year for an endpoint comparison.`
+            : `The gap is ${f(initial[1]-initial[0])} percentage points in 2023 and ${f(gap)} in ${year}. Endpoint labels show the two groups' actual shares. The comparison describes different cohorts and does not establish a causal effect of parental education.`
     ];
 
     charts.forEach(([id], i) => {
@@ -1705,16 +1732,12 @@ function updateText(year, grade, subject) {
             notes[i];
 
         if (i !== 4 && i !== 5) {
-            let source =
-                "Source: ACARA NAPLAN national results, 2026 workbook; selected assessment year and year level. Values displayed to one decimal place.";
-
-            if (i === 2 || i === 3) {
-                source +=
-                    " Boundaries: ABS via geoBoundaries, CC BY 4.0; conic equal-area projection; simplified outlines.";
-            }
-
-            article.querySelector(".source").textContent = source;
+            const context = [0,8].includes(i) ? "all year levels" : `Year ${grade}`;
+            article.querySelector(".source").textContent =
+                `Source: ACARA NAPLAN national results, 2026 workbook; ${i === 11 || i === 12 ? "2023–2026" : year}, ${context}. Values shown to one decimal place.` +
+                ([2,3].includes(i) ? " Boundaries: ABS via geoBoundaries, CC BY 4.0; conic equal-area projection, simplified outlines. Original reporting flags remain in tooltips." : "");
         }
+
     });
 
     const eyebrow = document.querySelector("header .eyebrow");
@@ -1965,6 +1988,45 @@ function prepareInterface() {
 // 10. RENDER AND UPDATE ALL FOURTEEN CHARTS
 // ==================================================
 
+function updateStateSummary() {
+    const summary = document.getElementById("state-summary");
+    if (!summary) return;
+    if (selectedState === "All states") {
+        summary.textContent = "All states and territories are shown. Choose one to connect its percentage, participant count, distribution point, participation and ordering.";
+        return;
+    }
+    const year = Number(document.getElementById("assessment-year").value);
+    const grade = Number(document.getElementById("year-level").value);
+    const subject = document.getElementById("assessment-subject").value;
+    const row = stateData.find(d => d.state === selectedState);
+    const prefix = subject.toLowerCase();
+    const value = row[prefix+"_support"], national = block(year,grade,subject).national[0];
+    const difference = value === null ? null : value-national;
+    const comparison = value === null ? "achievement is not reported because participation was too low" :
+        `${value.toFixed(1)}% need additional support, ${Math.abs(difference).toFixed(1)} percentage points ${difference >= 0 ? "above" : "below"} the national ${national.toFixed(1)}%`;
+    summary.textContent = `${row.state} · ${year} · Year ${grade} · ${subject}: ${comparison}. Participation is ${row[prefix+"_participation"].toFixed(1)}% (${row[prefix+"_participants"].toLocaleString("en-AU")} participants).` +
+        (row.abbr === "TAS" ? " Tasmania is omitted from chart 13 in every year to keep that comparison consistent." : "");
+}
+async function followState(state) {
+    if (rendering || (state !== "All states" && !stateData.some(d=>d.state===state))) return;
+    selectedState = state;
+    document.getElementById("follow-state").value = state;
+    for (const spec of [chart3,chart4,chart7,chart11,chart13]) spec.params.find(p=>p.name==="focus_state").value=state;
+    updateStateSummary();
+    const results = await Promise.allSettled(linkedChartIds.map(id => {
+        const view=activeViews.get(id);
+        return view ? view.signal("focus_state",state).runAsync() : Promise.resolve();
+    }));
+    for (const result of results) if(result.status==="rejected") console.error("State highlight",result.reason);
+}
+function connectStateClicks(id,view) {
+    if (!linkedChartIds.includes(id)) return;
+    view.addEventListener("click", (event,item) => {
+        const state=item?.datum?.properties?.STATE_NAME || item?.datum?.state;
+        if(stateData.some(d=>d.state===state))followState(state);
+    });
+}
+
 const activeViews = new Map();
 let rendering = false;
 
@@ -1982,7 +2044,7 @@ async function renderAllCharts() {
     rendering = true;
 
     const controls = [
-        ...document.querySelectorAll(".explore-controls select")
+        ...document.querySelectorAll(".explore-controls select, .explore-controls button, #follow-state")
     ];
 
     controls.forEach(select => {
@@ -2007,6 +2069,7 @@ async function renderAllCharts() {
     try {
         prepareCharts(year, grade, subject);
         updateText(year, grade, subject);
+        updateStateSummary();
 
         for (const [id, spec] of charts) {
             try {
@@ -2029,6 +2092,7 @@ async function renderAllCharts() {
                 );
 
                 activeViews.set(id, result.view);
+                connectStateClicks(id, result.view);
             } catch (error) {
                 failures++;
 
@@ -2071,4 +2135,14 @@ for (const id of [
     );
 }
 
+document.getElementById("follow-state").addEventListener("change", event => followState(event.target.value));
+document.getElementById("reset-filters").addEventListener("click", () => {
+    if(rendering) return;
+    document.getElementById("assessment-year").value = "2026";
+    document.getElementById("year-level").value = "9";
+    document.getElementById("assessment-subject").value = "Reading";
+    document.getElementById("follow-state").value = "All states";
+    selectedState = "All states";
+    renderAllCharts();
+});
 renderAllCharts();

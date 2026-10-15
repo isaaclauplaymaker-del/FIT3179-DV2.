@@ -1,0 +1,177 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 450,
+  "height": 240,
+  "padding": 8,
+  "background": "transparent",
+  "data": [
+    {
+      "name": "tree",
+      "values": [
+        {
+          "id": "All schools",
+          "parent": null
+        },
+        {
+          "id": "Government",
+          "parent": "All schools",
+          "value": 2613404
+        },
+        {
+          "id": "Catholic",
+          "parent": "All schools",
+          "value": 831692
+        },
+        {
+          "id": "Independent",
+          "parent": "All schools",
+          "value": 715822
+        }
+      ],
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "value",
+          "sort": {
+            "field": "value",
+            "order": "descending"
+          },
+          "method": "squarify",
+          "size": [
+            450,
+            240
+          ],
+          "paddingInner": 4,
+          "paddingOuter": 0
+        }
+      ]
+    },
+    {
+      "name": "leaves",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.depth == 1"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [
+        "Government",
+        "Catholic",
+        "Independent"
+      ],
+      "range": [
+        "#177b79",
+        "#476f95",
+        "#daa65b"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "x0"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y2": {
+            "field": "y1"
+          },
+          "fill": {
+            "scale": "color",
+            "field": "id"
+          },
+          "tooltip": {
+            "signal": "{'Sector':datum.id,'Enrolments':format(datum.value,',.0f'),'Share':format(datum.value/4160918,'.1%')}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "(datum.x0+datum.x1)/2"
+          },
+          "y": {
+            "signal": "(datum.y0+datum.y1)/2 - 8"
+          },
+          "align": {
+            "value": "center"
+          },
+          "text": {
+            "field": "id"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "signal": "min(13, (datum.x1-datum.x0-12)/7)"
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "signal": "datum.id === 'Independent' ? '#193a3a' : 'white'"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "(datum.x0+datum.x1)/2"
+          },
+          "y": {
+            "signal": "(datum.y0+datum.y1)/2 + 14"
+          },
+          "align": {
+            "value": "center"
+          },
+          "text": {
+            "signal": "format(datum.value/4160918,'.1%')"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fill": {
+            "signal": "datum.id === 'Independent' ? '#193a3a' : 'white'"
+          }
+        }
+      }
+    }
+  ]
+}

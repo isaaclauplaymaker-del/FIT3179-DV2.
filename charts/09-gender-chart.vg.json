@@ -1,0 +1,144 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "padding": 12,
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#193a3a",
+      "titleColor": "#193a3a",
+      "domain": false,
+      "gridColor": "#e1e5dd",
+      "labelPadding": 6,
+      "titlePadding": 12
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleLimit": 300,
+      "labelLimit": 220,
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "titleFontWeight": "normal"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 14,
+      "color": "#193a3a"
+    }
+  },
+  "width": 420,
+  "height": 250,
+  "data": {
+    "values": [
+      {
+        "grade": "Year 3",
+        "domain": "Reading",
+        "gap": 6.6044
+      },
+      {
+        "grade": "Year 3",
+        "domain": "Numeracy",
+        "gap": -5.2589
+      },
+      {
+        "grade": "Year 5",
+        "domain": "Reading",
+        "gap": 5.5661
+      },
+      {
+        "grade": "Year 5",
+        "domain": "Numeracy",
+        "gap": -6.2175
+      },
+      {
+        "grade": "Year 7",
+        "domain": "Reading",
+        "gap": 8.0956
+      },
+      {
+        "grade": "Year 7",
+        "domain": "Numeracy",
+        "gap": -4.6079
+      },
+      {
+        "grade": "Year 9",
+        "domain": "Reading",
+        "gap": 9.8517
+      },
+      {
+        "grade": "Year 9",
+        "domain": "Numeracy",
+        "gap": -4.2781
+      }
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 2
+  },
+  "encoding": {
+    "y": {
+      "field": "grade",
+      "type": "ordinal",
+      "title": null,
+      "sort": [
+        "Year 3",
+        "Year 5",
+        "Year 7",
+        "Year 9"
+      ]
+    },
+    "yOffset": {
+      "field": "domain"
+    },
+    "x": {
+      "field": "gap",
+      "type": "quantitative",
+      "title": "Female minus male: Strong or Exceeding (percentage points)",
+      "scale": {
+        "domain": [
+          -20,
+          20
+        ]
+      }
+    },
+    "color": {
+      "field": "domain",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Reading",
+          "Numeracy"
+        ],
+        "range": [
+          "#177b79",
+          "#bd532c"
+        ]
+      },
+      "legend": {
+        "title": null
+      }
+    },
+    "tooltip": [
+      {
+        "field": "grade",
+        "title": "Year level"
+      },
+      {
+        "field": "domain",
+        "title": "Subject"
+      },
+      {
+        "field": "gap",
+        "title": "Female minus male (pp)",
+        "format": ".1f"
+      }
+    ]
+  }
+}

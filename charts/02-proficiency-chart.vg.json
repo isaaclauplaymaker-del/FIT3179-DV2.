@@ -1,0 +1,177 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "padding": 12,
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#193a3a",
+      "titleColor": "#193a3a",
+      "domain": false,
+      "gridColor": "#e1e5dd",
+      "labelPadding": 6,
+      "titlePadding": 12
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleLimit": 300,
+      "labelLimit": 220,
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "titleFontWeight": "normal"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 14,
+      "color": "#193a3a"
+    }
+  },
+  "width": 500,
+  "height": 120,
+  "data": {
+    "values": [
+      {
+        "subject": "Reading",
+        "category": "Needs additional support",
+        "percentage": 11.1142,
+        "order": 1
+      },
+      {
+        "subject": "Reading",
+        "category": "Developing",
+        "percentage": 25.0873,
+        "order": 2
+      },
+      {
+        "subject": "Reading",
+        "category": "Strong",
+        "percentage": 45.6783,
+        "order": 3
+      },
+      {
+        "subject": "Reading",
+        "category": "Exceeding",
+        "percentage": 16.34,
+        "order": 4
+      },
+      {
+        "subject": "Reading",
+        "category": "Exempt",
+        "percentage": 1.7864,
+        "order": 5
+      },
+      {
+        "subject": "Numeracy",
+        "category": "Needs additional support",
+        "percentage": 10.9627,
+        "order": 1
+      },
+      {
+        "subject": "Numeracy",
+        "category": "Developing",
+        "percentage": 21.9648,
+        "order": 2
+      },
+      {
+        "subject": "Numeracy",
+        "category": "Strong",
+        "percentage": 52.0431,
+        "order": 3
+      },
+      {
+        "subject": "Numeracy",
+        "category": "Exceeding",
+        "percentage": 13.2512,
+        "order": 4
+      },
+      {
+        "subject": "Numeracy",
+        "category": "Exempt",
+        "percentage": 1.7847,
+        "order": 5
+      }
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "height": 35
+  },
+  "encoding": {
+    "y": {
+      "field": "subject",
+      "type": "nominal",
+      "sort": [
+        "Reading",
+        "Numeracy"
+      ],
+      "title": null
+    },
+    "x": {
+      "field": "percentage",
+      "type": "quantitative",
+      "stack": "zero",
+      "title": "Share of reported participants (%)",
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      },
+      "axis": {
+        "labelExpr": "datum.value + '%'"
+      }
+    },
+    "color": {
+      "field": "category",
+      "type": "nominal",
+      "title": null,
+      "scale": {
+        "domain": [
+          "Needs additional support",
+          "Developing",
+          "Strong",
+          "Exceeding",
+          "Exempt"
+        ],
+        "range": [
+          "#bd532c",
+          "#daa65b",
+          "#77aaa0",
+          "#177b79",
+          "#c2c8bf"
+        ]
+      },
+      "legend": {
+        "columns": 2,
+        "labelLimit": 250
+      }
+    },
+    "order": {
+      "field": "order",
+      "type": "quantitative",
+      "sort": "ascending"
+    },
+    "tooltip": [
+      {
+        "field": "subject",
+        "title": "Subject"
+      },
+      {
+        "field": "category",
+        "title": "Category"
+      },
+      {
+        "field": "percentage",
+        "title": "Percentage (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+  "title": "Year 9 proficiency, Australia, 2026"
+}

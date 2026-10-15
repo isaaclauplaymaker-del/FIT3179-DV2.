@@ -1,0 +1,361 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "padding": 12,
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": "normal",
+      "labelColor": "#193a3a",
+      "titleColor": "#193a3a",
+      "domain": false,
+      "gridColor": "#e1e5dd",
+      "labelPadding": 6,
+      "titlePadding": 12
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleLimit": 300,
+      "labelLimit": 220,
+      "labelFontSize": 13,
+      "titleFontSize": 11,
+      "titleFontWeight": "normal"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 14,
+      "color": "#193a3a"
+    }
+  },
+  "width": 740,
+  "height": 290,
+  "data": {
+    "values": [
+      {
+        "year": 2023,
+        "state": "New South Wales",
+        "abbr": "NSW",
+        "support": 10.4448,
+        "flag": ""
+      },
+      {
+        "year": 2023,
+        "state": "Victoria",
+        "abbr": "VIC",
+        "support": 7.8375,
+        "flag": ""
+      },
+      {
+        "year": 2023,
+        "state": "Queensland",
+        "abbr": "QLD",
+        "support": 13.9487,
+        "flag": "#"
+      },
+      {
+        "year": 2023,
+        "state": "South Australia",
+        "abbr": "SA",
+        "support": 11.2211,
+        "flag": ""
+      },
+      {
+        "year": 2023,
+        "state": "Western Australia",
+        "abbr": "WA",
+        "support": 7.8374,
+        "flag": ""
+      },
+      {
+        "year": 2023,
+        "state": "Northern Territory",
+        "abbr": "NT",
+        "support": 34.6914,
+        "flag": "#"
+      },
+      {
+        "year": 2023,
+        "state": "Australian Capital Territory",
+        "abbr": "ACT",
+        "support": 9.1679,
+        "flag": ""
+      },
+      {
+        "year": 2024,
+        "state": "New South Wales",
+        "abbr": "NSW",
+        "support": 10.2804,
+        "flag": ""
+      },
+      {
+        "year": 2024,
+        "state": "Victoria",
+        "abbr": "VIC",
+        "support": 8.5494,
+        "flag": ""
+      },
+      {
+        "year": 2024,
+        "state": "Queensland",
+        "abbr": "QLD",
+        "support": 15.139,
+        "flag": "#"
+      },
+      {
+        "year": 2024,
+        "state": "South Australia",
+        "abbr": "SA",
+        "support": 13.0522,
+        "flag": ""
+      },
+      {
+        "year": 2024,
+        "state": "Western Australia",
+        "abbr": "WA",
+        "support": 7.0606,
+        "flag": ""
+      },
+      {
+        "year": 2024,
+        "state": "Northern Territory",
+        "abbr": "NT",
+        "support": 36.8752,
+        "flag": "#"
+      },
+      {
+        "year": 2024,
+        "state": "Australian Capital Territory",
+        "abbr": "ACT",
+        "support": 8.8069,
+        "flag": ""
+      },
+      {
+        "year": 2025,
+        "state": "New South Wales",
+        "abbr": "NSW",
+        "support": 9.2276,
+        "flag": ""
+      },
+      {
+        "year": 2025,
+        "state": "Victoria",
+        "abbr": "VIC",
+        "support": 7.1983,
+        "flag": ""
+      },
+      {
+        "year": 2025,
+        "state": "Queensland",
+        "abbr": "QLD",
+        "support": 13.1831,
+        "flag": "#"
+      },
+      {
+        "year": 2025,
+        "state": "South Australia",
+        "abbr": "SA",
+        "support": 11.6641,
+        "flag": ""
+      },
+      {
+        "year": 2025,
+        "state": "Western Australia",
+        "abbr": "WA",
+        "support": 6.9265,
+        "flag": ""
+      },
+      {
+        "year": 2025,
+        "state": "Northern Territory",
+        "abbr": "NT",
+        "support": 35.9715,
+        "flag": "#"
+      },
+      {
+        "year": 2025,
+        "state": "Australian Capital Territory",
+        "abbr": "ACT",
+        "support": 8.2531,
+        "flag": ""
+      },
+      {
+        "year": 2026,
+        "state": "New South Wales",
+        "abbr": "NSW",
+        "support": 10.8404,
+        "flag": ""
+      },
+      {
+        "year": 2026,
+        "state": "Victoria",
+        "abbr": "VIC",
+        "support": 7.9366,
+        "flag": ""
+      },
+      {
+        "year": 2026,
+        "state": "Queensland",
+        "abbr": "QLD",
+        "support": 15.1393,
+        "flag": "#"
+      },
+      {
+        "year": 2026,
+        "state": "South Australia",
+        "abbr": "SA",
+        "support": 13.421,
+        "flag": ""
+      },
+      {
+        "year": 2026,
+        "state": "Western Australia",
+        "abbr": "WA",
+        "support": 7.4789,
+        "flag": ""
+      },
+      {
+        "year": 2026,
+        "state": "Northern Territory",
+        "abbr": "NT",
+        "support": 33.2477,
+        "flag": "#"
+      },
+      {
+        "year": 2026,
+        "state": "Australian Capital Territory",
+        "abbr": "ACT",
+        "support": 8.57,
+        "flag": ""
+      }
+    ]
+  },
+  "transform": [
+    {
+      "window": [
+        {
+          "op": "rank",
+          "as": "rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "support",
+          "order": "ascending"
+        }
+      ],
+      "groupby": [
+        "year"
+      ]
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "point": {
+      "filled": true,
+      "size": 65
+    },
+    "strokeWidth": 2.5
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": "Assessment year",
+      "axis": {
+        "format": "d",
+        "values": [
+          2023,
+          2024,
+          2025,
+          2026
+        ]
+      }
+    },
+    "y": {
+      "field": "rank",
+      "type": "quantitative",
+      "title": "Ordering by support share (1 = lowest)",
+      "scale": {
+        "domain": [
+          1,
+          7
+        ],
+        "reverse": true
+      },
+      "axis": {
+        "values": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    "color": {
+      "field": "abbr",
+      "type": "nominal",
+      "title": "Jurisdiction",
+      "scale": {
+        "scheme": "tableau10"
+      },
+      "legend": {
+        "columns": 4
+      }
+    },
+    "detail": {
+      "field": "state"
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "title": "State / territory"
+      },
+      {
+        "field": "year",
+        "title": "Year",
+        "format": "d"
+      },
+      {
+        "field": "rank",
+        "title": "Order"
+      },
+      {
+        "field": "support",
+        "title": "Needs additional support (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "flag",
+        "title": "Reporting flag"
+      }
+    ],
+    "opacity": {
+      "condition": {
+        "test": "focus_state === 'All states' || datum.state === focus_state",
+        "value": 1
+      },
+      "value": 0.16
+    },
+    "strokeWidth": {
+      "condition": {
+        "test": "datum.state === focus_state",
+        "value": 4
+      },
+      "value": 2.5
+    }
+  },
+  "params": [
+    {
+      "name": "focus_state",
+      "value": "All states"
+    }
+  ]
+}

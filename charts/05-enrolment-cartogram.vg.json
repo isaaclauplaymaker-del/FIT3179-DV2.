@@ -1,0 +1,203 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "padding": 12,
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#193a3a",
+      "titleColor": "#193a3a",
+      "domain": false,
+      "gridColor": "#e1e5dd",
+      "labelPadding": 6,
+      "titlePadding": 12
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleLimit": 300,
+      "labelLimit": 220,
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "titleFontWeight": "normal"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 14,
+      "color": "#193a3a"
+    }
+  },
+  "width": 450,
+  "height": 340,
+  "data": {
+    "values": [
+      {
+        "state": "New South Wales",
+        "abbr": "NSW",
+        "total": 1257730,
+        "x": 446.51807196701037,
+        "y": 172.27171401387457,
+        "labelY": 232.1447876620465
+      },
+      {
+        "state": "Victoria",
+        "abbr": "VIC",
+        "total": 1064538,
+        "x": 403.4080574108963,
+        "y": 78.81611482179255,
+        "labelY": 134.85924593088782
+      },
+      {
+        "state": "Queensland",
+        "abbr": "QLD",
+        "total": 889635,
+        "x": 403,
+        "y": 286,
+        "labelY": 338.26275905487023
+      },
+      {
+        "state": "South Australia",
+        "abbr": "SA",
+        "total": 284559,
+        "x": 286,
+        "y": 182,
+        "labelY": 216.77108711819406
+      },
+      {
+        "state": "Western Australia",
+        "abbr": "WA",
+        "total": 466285,
+        "x": 117,
+        "y": 247,
+        "labelY": 288.1489774489474
+      },
+      {
+        "state": "Tasmania",
+        "abbr": "TAS",
+        "total": 80280,
+        "x": 442,
+        "y": 26,
+        "labelY": 50.09487219961457
+      },
+      {
+        "state": "Northern Territory",
+        "abbr": "NT",
+        "total": 40005,
+        "x": 260,
+        "y": 325,
+        "labelY": 345.5379722556072
+      },
+      {
+        "state": "Australian Capital Territory",
+        "abbr": "ACT",
+        "total": 77886,
+        "x": 470.8738706220933,
+        "y": 109.01217116433291,
+        "labelY": 132.9253401444402
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "x",
+      "type": "quantitative",
+      "axis": null,
+      "scale": {
+        "domain": [
+          -10,
+          530
+        ]
+      }
+    },
+    "y": {
+      "field": "y",
+      "type": "quantitative",
+      "axis": null,
+      "scale": {
+        "domain": [
+          -25,
+          350
+        ]
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.87,
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "size": {
+          "field": "total",
+          "type": "quantitative",
+          "title": "All school enrolments, 2025",
+          "scale": {
+            "range": [
+              0,
+              7200
+            ],
+            "domain": [
+              0,
+              1257730
+            ]
+          },
+          "legend": {
+            "values": [
+              100000,
+              500000,
+              1000000
+            ],
+            "format": ".2s",
+            "titleLimit": 250
+          }
+        },
+        "color": {
+          "value": "#177b79"
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "title": "State / territory"
+          },
+          {
+            "field": "total",
+            "title": "All school enrolments",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "color": "#193a3a",
+        "fontSize": 11,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "y": {
+          "field": "labelY",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {
+            "domain": [
+              -25,
+              350
+            ]
+          }
+        },
+        "text": {
+          "field": "abbr"
+        }
+      }
+    }
+  ]
+}

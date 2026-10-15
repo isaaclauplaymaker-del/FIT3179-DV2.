@@ -1,0 +1,183 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "padding": 12,
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "labelColor": "#193a3a",
+      "titleColor": "#193a3a",
+      "domain": false,
+      "gridColor": "#e1e5dd",
+      "labelPadding": 6,
+      "titlePadding": 12
+    },
+    "legend": {
+      "orient": "bottom",
+      "titleLimit": 300,
+      "labelLimit": 220,
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "titleFontWeight": "normal"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 14,
+      "color": "#193a3a"
+    }
+  },
+  "width": 500,
+  "height": 270,
+  "data": {
+    "values": [
+      {
+        "state": "New South Wales",
+        "participation": 92.704,
+        "national": 89.7568
+      },
+      {
+        "state": "Victoria",
+        "participation": 92.5815,
+        "national": 89.7568
+      },
+      {
+        "state": "Queensland",
+        "participation": 83.7006,
+        "national": 89.7568
+      },
+      {
+        "state": "South Australia",
+        "participation": 89.4495,
+        "national": 89.7568
+      },
+      {
+        "state": "Western Australia",
+        "participation": 93.7435,
+        "national": 89.7568
+      },
+      {
+        "state": "Tasmania",
+        "participation": 61.4403,
+        "national": 89.7568
+      },
+      {
+        "state": "Northern Territory",
+        "participation": 71.6254,
+        "national": 89.7568
+      },
+      {
+        "state": "Australian Capital Territory",
+        "participation": 90.4231,
+        "national": 89.7568
+      }
+    ]
+  },
+  "encoding": {
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "New South Wales",
+        "Victoria",
+        "Queensland",
+        "South Australia",
+        "Western Australia",
+        "Tasmania",
+        "Northern Territory",
+        "Australian Capital Territory"
+      ]
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "color": "#e1e7e0",
+        "size": 24
+      },
+      "encoding": {
+        "x": {
+          "datum": 100,
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "title": "Participation (%)"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "color": "#177b79",
+        "size": 13
+      },
+      "encoding": {
+        "x": {
+          "field": "participation",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "title": "Participation (%)"
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "title": "State / territory"
+          },
+          {
+            "field": "participation",
+            "title": "Participation (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "national",
+            "title": "National reference (%)",
+            "format": ".1f"
+          }
+        ],
+        "opacity": {
+          "condition": {
+            "test": "focus_state === 'All states' || datum.state === focus_state",
+            "value": 1
+          },
+          "value": 0.25
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "tick",
+        "color": "#bd532c",
+        "thickness": 3,
+        "size": 28
+      },
+      "encoding": {
+        "x": {
+          "field": "national",
+          "type": "quantitative"
+        }
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "focus_state",
+      "value": "All states"
+    }
+  ]
+}

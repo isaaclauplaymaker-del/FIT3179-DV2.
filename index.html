@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Literacy and Numeracy in Australia</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0" defer></script>
+
+    <script src="js/visualisation.js" defer></script>
+</head>
+
+<body>
+<main>
+    <header>
+        <p class="eyebrow">EDUCATION IN AUSTRALIA · NAPLAN 2026</p>
+
+        <h1>Literacy and Numeracy in Australia</h1>
+        <h2>Who needs more support?</h2>
+
+        <p class="lead">
+            National averages provide a starting point. Reading and
+            numeracy outcomes also vary across year levels, places
+            and student backgrounds.
+        </p>
+
+        <p>
+            NAPLAN is the National Assessment Program – Literacy and
+            Numeracy. It assesses students in Years 3, 5, 7 and 9.
+            This story examines Reading and Numeracy.
+        </p>
+
+        <p>
+            “Needs additional support” is an official proficiency
+            category. “Strong or Exceeding” combines the two highest
+            categories. Standards are specific to each subject and
+            year level.
+        </p>
+    </header>
+
+    <div class="explore-controls">
+        <h2>Explore the story</h2>
+
+        <div class="control">
+            <label for="assessment-year">ASSESSMENT YEAR</label>
+            <select id="assessment-year">
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026" selected>2026</option>
+            </select>
+        </div>
+
+        <div class="control">
+            <label for="year-level">YEAR LEVEL</label>
+            <select id="year-level">
+                <option value="3">Year 3</option>
+                <option value="5">Year 5</option>
+                <option value="7">Year 7</option>
+                <option value="9" selected>Year 9</option>
+            </select>
+        </div>
+
+        <div class="control">
+            <label for="assessment-subject">SUBJECT</label>
+            <select id="assessment-subject">
+                <option value="Reading" selected>Reading</option>
+                <option value="Numeracy">Numeracy</option>
+            </select>
+        </div>
+
+        <p class="control-hint">Hover over marks for details.</p>
+    </div>
+
+    <p class="filter-note">
+        Captions identify the data shown in each chart.
+        Views comparing both subjects retain both subjects.
+        ABS population charts remain fixed at 2025.
+        Trend charts retain the 2023–2026 comparison window.
+    </p>
+
+    <p id="page-status" role="status">Loading 14 charts…</p>
+
+    <noscript>
+        <p>Please enable JavaScript to view the charts.</p>
+    </noscript>
+
+    <section>
+        <p class="eyebrow">01 / THE NATIONAL PICTURE</p>
+        <h2>Start with the national results</h2>
+
+        <p class="section-intro">
+            Compare the share needing additional support, then
+            examine how students are distributed across the
+            proficiency categories.
+        </p>
+
+        <div class="chart-grid">
+            <article>
+                <p class="chart-number">CHART 1 · HEATMAP</p>
+                <h3>Which year levels need more support?</h3>
+                <p class="chart-subtitle"></p>
+                <div id="national-chart" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ACARA NAPLAN national results,
+                    2026 release. Values displayed to one decimal place.
+                </p>
+            </article>
+
+            <article>
+                <p class="chart-number">CHART 2 · STACKED BAR</p>
+                <h3>The full proficiency picture</h3>
+                <p class="chart-subtitle"></p>
+                <div id="proficiency-chart" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ACARA, 2026 release.
+                    Published category percentages are retained
+                    without normalising.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section>
+        <p class="eyebrow">02 / DIFFERENCES ACROSS AUSTRALIA</p>
+        <h2>Place, proportion and population</h2>
+
+        <p class="section-intro">
+            A high support percentage and a large student population
+            answer different questions. These views distinguish
+            achievement percentages from population counts.
+        </p>
+
+        <div class="chart-grid">
+            <article>
+                <p class="chart-number">CHART 3 · CHOROPLETH MAP</p>
+                <h3>Where is the support percentage higher?</h3>
+                <p class="chart-subtitle"></p>
+                <div id="state-map" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ACARA; simplified ABS boundaries via
+                    geoBoundaries. Conic equal-area projection.
+                    Fixed 0–40% colour scale. ACT is small; hover
+                    for its result.
+                </p>
+            </article>
+
+            <article>
+                <p class="chart-number">
+                    CHART 4 · PROPORTIONAL-SYMBOL MAP
+                </p>
+                <h3>How many students participated?</h3>
+                <p class="chart-subtitle"></p>
+                <div id="participant-map" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ACARA. Circle area represents count.
+                    Representative locations are not school locations.
+                    Conic equal-area projection.
+                </p>
+            </article>
+
+            <article>
+                <p class="chart-number">CHART 5 · DORLING CARTOGRAM</p>
+                <h3>Land area is not student population</h3>
+                <p class="chart-subtitle"></p>
+                <div id="enrolment-cartogram" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ABS Schools 2025, Map 1 accessible
+                    description. A Dorling cartogram has no
+                    conventional map projection.
+                </p>
+            </article>
+
+            <article>
+                <p class="chart-number">CHART 6 · TREEMAP</p>
+                <h3>The wider school population</h3>
+                <p class="chart-subtitle"></p>
+                <div id="sector-treemap" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ABS Schools 2025, Table 1.
+                    Enrolments cover all school year levels.
+                </p>
+            </article>
+        </div>
+
+        <article class="wide-chart">
+            <p class="chart-number">CHART 7 · BOX PLOT</p>
+            <h3>How spread out are state support percentages?</h3>
+            <p class="chart-subtitle"></p>
+            <div id="state-distribution" class="chart"></div>
+            <p class="chart-note"></p>
+            <p class="source">
+                Source: ACARA. Suppressed achievement is omitted.
+                The median of jurisdiction percentages is not the
+                national percentage.
+            </p>
+        </article>
+    </section>
+
+    <section>
+        <p class="eyebrow">03 / STUDENT GROUPS</p>
+        <h2>Look beyond the state average</h2>
+
+        <p class="section-intro">
+            Remoteness and student backgrounds provide further views
+            of the results. These comparisons describe associations
+            and cannot establish their causes.
+        </p>
+
+        <div class="chart-grid">
+            <article>
+                <p class="chart-number">CHART 8 · CONNECTED DOT PLOT</p>
+                <h3>Support needs across remoteness</h3>
+                <p class="chart-subtitle"></p>
+                <div id="remoteness-chart" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ACARA, ABS remoteness groups.
+                    Connectors show subject differences, not student
+                    movement between groups.
+                </p>
+            </article>
+
+            <article>
+                <p class="chart-number">CHART 9 · DIVERGING BAR</p>
+                <h3>Does the gender difference depend on the subject?</h3>
+                <p class="chart-subtitle"></p>
+                <div id="gender-chart" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ACARA, Gender groups.
+                    The chart does not test statistical significance.
+                </p>
+            </article>
+        </div>
+
+        <article class="wide-chart">
+            <p class="chart-number">CHART 10 · PARALLEL COORDINATES</p>
+            <h3>Different backgrounds, different proficiency profiles</h3>
+            <p class="chart-subtitle"></p>
+            <div id="parent-chart" class="chart"></div>
+            <p class="chart-note"></p>
+            <p class="source">
+                Source: ACARA, highest parental education.
+                Shift-click legend labels to select multiple groups;
+                double-click to reset.
+            </p>
+        </article>
+    </section>
+
+    <section>
+        <p class="eyebrow">04 / PARTICIPATION AND CHANGE</p>
+        <h2>Who is represented, and what has changed?</h2>
+
+        <p class="section-intro">
+            Participation helps explain the coverage of an assessment.
+            The final views compare results within the measurement
+            series that began in 2023.
+        </p>
+
+        <div class="chart-grid">
+            <article>
+                <p class="chart-number">CHART 11 · BULLET CHART</p>
+                <h3>Participation against the national reference</h3>
+                <p class="chart-subtitle"></p>
+                <div id="participation-chart" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ACARA, Participation (%).
+                    Tasmania's participation remains available when
+                    its achievement is suppressed.
+                </p>
+            </article>
+
+            <article>
+                <p class="chart-number">CHART 12 · LINE CHART</p>
+                <h3>National support needs since 2023</h3>
+                <p class="chart-subtitle"></p>
+                <div id="trend-chart" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ACARA, national overall results.
+                    Both subjects use the same percentage scale.
+                </p>
+            </article>
+
+            <article>
+                <p class="chart-number">CHART 13 · BUMP CHART</p>
+                <h3>How has jurisdiction ordering changed?</h3>
+                <p class="chart-subtitle"></p>
+                <div id="bump-chart" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ACARA, jurisdiction overall results.
+                    Read chart 3 alongside this ordering to see
+                    the actual percentages.
+                </p>
+            </article>
+
+            <article>
+                <p class="chart-number">CHART 14 · SLOPE CHART</p>
+                <h3>The parental-education proficiency gap</h3>
+                <p class="chart-subtitle"></p>
+                <div id="education-slope" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ACARA, Strong or above (%).
+                    Two parental-education groups are compared;
+                    other groups remain available in chart 10.
+                </p>
+            </article>
+        </div>
+
+        <div class="closing">
+            <h2>Support needs have more than one dimension</h2>
+            <p>
+                National results, geographic differences, participation
+                and student-group profiles offer different views of
+                literacy and numeracy performance. Interpret them
+                together, while remembering that a group result does
+                not predict an individual student's achievement.
+            </p>
+        </div>
+    </section>
+
+    <section class="sources">
+        <h2>Sources and reporting notes</h2>
+
+        <p>
+            <a href="https://www.acara.edu.au/reporting/national-report-on-schooling-in-australia/naplan-national-results"
+               target="_blank" rel="noopener noreferrer">
+                ACARA NAPLAN national results, 2026 release
+            </a>
+            ·
+            <a href="https://dataandreporting.blob.core.windows.net/anrdataportal/ANR-ExcelDownloads/2026NAP/NAPLAN%20national%20results%20dataset.xlsx"
+               target="_blank" rel="noopener noreferrer">
+                Original Excel workbook
+            </a>.
+            Selected records from the NAPLAN Results sheet cover
+            2023–2026, Years 3, 5, 7 and 9, and Reading and Numeracy.
+            Percentages are retained to four decimal places and
+            displayed to one.
+        </p>
+
+        <p>
+            <a href="https://www.abs.gov.au/statistics/people/education/schools/2025"
+               target="_blank" rel="noopener noreferrer">
+                ABS Schools 2025
+            </a>.
+            State counts come from Map 1's accessible description;
+            sector counts come from Table 1. ABS all-school
+            enrolments and NAPLAN participants are different
+            populations and are not multiplied together to estimate
+            support headcounts.
+        </p>
+
+        <p>
+            <a href="https://www.geoboundaries.org/api/current/gbOpen/AUS/ADM1/"
+               target="_blank" rel="noopener noreferrer">
+                ABS ASGS Edition 3 boundaries via geoBoundaries
+            </a>.
+            Licensed under
+            <a href="https://creativecommons.org/licenses/by/4.0/"
+               target="_blank" rel="noopener noreferrer">
+                CC BY 4.0
+            </a>.
+            Embedded outlines are simplified and coordinates rounded.
+            Small islands and Other Territories are omitted.
+        </p>
+
+        <p>
+            Suppressed achievement remains missing, not zero.
+            Tasmania's 2026 achievement is suppressed because of
+            low participation. Original state reporting flags are
+            retained. NAPLAN achievement before 2023 is not directly
+            comparable with the measurement series beginning in 2023.
+            Sources accessed 15 October 2026.
+        </p>
+    </section>
+
+    <footer>
+        <p>Isaac Lau · FIT3179 Data Visualisation 2 · 15 October 2026</p>
+        <p>
+            AI acknowledgement: OpenAI ChatGPT assisted with planning,
+            source checking, data preparation, code, debugging and
+            wording. The author is responsible for reviewing and
+            explaining the work.
+        </p>
+    </footer>
+</main>
+</body>
+</html>

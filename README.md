@@ -1,6 +1,7 @@
 # Literacy and Numeracy in Australia
 
-FIT3179 Data Visualisation 2, Isaac Lau. A single scrolling story for Malaysian readers interested in Australian school education. It asks where support needs are concentrated and what national averages hide.
+FIT3179 Data Visualisation 2, Isaac Lau. A single scrolling story for Malaysian readers interested in Australian school education. It asks where support needs are concentrated and what national averages hide.  
+https://isaaclauplaymaker-del.github.io/FIT3179-DV2./#national-picture
 
 ## View and edit
 

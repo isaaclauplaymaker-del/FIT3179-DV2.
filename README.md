@@ -14,7 +14,7 @@ Choose a state in the Follow a state selector, or click a state mark in charts 3
 
 The `charts/` folder contains 14 readable, self-contained Vega/Vega-Lite specifications exported from the live definitions for the default assessment: 2026, Year 9, Reading, all states. The running page uses those same definitions with the selected data. After changing the definitions, run `node tools/export-specs.cjs` to refresh the snapshots and source links.
 
-Charts: heatmap; proficiency stacked bars; choropleth; proportional-symbol map; Dorling cartogram; school-sector treemap; jurisdiction box plots; remoteness connected dots; gender-gap diverging bars; parental-education parallel coordinates; participation bullet chart; national trends; jurisdiction bump chart; parental-education endpoint slopes.
+Charts: heatmap; proficiency stacked bars; choropleth; proportional-symbol map; non-contiguous area cartogram; school-sector treemap; jurisdiction box plots; remoteness connected dots; gender-gap diverging bars; parental-education parallel coordinates; participation bullet chart; national trends; jurisdiction percentage trends; parental-education endpoint slopes.
 
 ## Sources and transformations
 
@@ -26,7 +26,7 @@ Charts: heatmap; proficiency stacked bars; choropleth; proportional-symbol map; 
 
 NAPLAN Results fields used: Calendar year, Year level, Domain, State/territory, Student attribute, Subgroup, Reporting flag, Participation (%), Participation (Num), Exempt (%), Needs additional support (%), Developing (%), Strong (%), Exceeding (%), and Strong or above (%). Selected year/grade/subject blocks use compact arrays whose field order is documented immediately above `FILTER_DATA`. Values are retained to four decimals and shown to one.
 
-Gender gaps are female minus male Strong-or-above shares, in percentage points. Chart 14 uses the workbook's Strong-or-above field. State ordering is ascending support share among the same seven jurisdictions in every year; it does not test significance. Category totals are not normalised. Exempt remains separate from the four proficiency categories. Parental-education profiles omit Exempt and Not stated without normalisation.
+Gender gaps are female minus male Strong-or-above shares, in percentage points. Chart 14 uses the workbook's Strong-or-above field. Jurisdiction trends show actual support percentages on a fixed 0–40% vertical scale among the same seven jurisdictions in every year; Tasmania is excluded throughout because 2026 achievement is suppressed. These are different annual cohorts, and changes do not test significance. The national heatmap and state choropleth share a fixed 0–40% orange colour scale. Category totals are not normalised. Exempt remains separate from the four proficiency categories. Parental-education profiles omit Exempt and Not stated without normalisation.
 
 Tasmania's 2026 achievement is suppressed (`s.p.`), stored as null and coloured grey. Participation remains available. Source flags, including `#`, remain in applicable tooltips; consult the original workbook's reporting notes when interpreting flagged results. A missing result is never treated as zero. NAPLAN achievement before the 2023 measurement reset is not joined to this series. ABS enrolments and NAPLAN participant counts have different scopes and are not multiplied together to estimate support counts.
 
@@ -37,3 +37,9 @@ The implementation applies the taught marks/channels, narrative, colour/layout, 
 The webpage and code do not replace the required original hand-drawn sketch, studio feedback process, submission template, actual deployed-page screenshot or interview. Chart count and advanced-idiom classification remain subject to the marking rubric.
 
 AI acknowledgement: OpenAI ChatGPT assisted with planning, source checking, data preparation, code, debugging and wording. The author is responsible for reviewing and explaining the work.
+
+## Revised presentation
+
+A compact sticky assessment dock stays visible beyond the first chapter, with one set of year, year-level and subject controls. The opening offers Let’s explore and Find a state links. The closing material explains Why, What and How for general readers.
+
+The enrolment map uses separately scaled state polygons within pale reference outlines. Geometry is first projected with a conic equal-area projection, then each polygon is scaled uniformly around its centroid. A common polygon-area-per-enrolment factor preserves proportional areas across jurisdictions. These prepared display coordinates are rendered with an identity projection; source counts and original map outlines are unchanged. Tasmania and ACT are separately labelled. This is distinct from the choropleth and proportional-symbol participant map.

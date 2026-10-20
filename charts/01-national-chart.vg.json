@@ -128,8 +128,9 @@
             "scheme": "oranges",
             "domain": [
               0,
-              15
-            ]
+              40
+            ],
+            "clamp": true
           }
         },
         "tooltip": [
@@ -161,7 +162,7 @@
         },
         "color": {
           "condition": {
-            "test": "datum.support >= 10",
+            "test": "datum.support >= 28",
             "value": "white"
           },
           "value": "#193a3a"

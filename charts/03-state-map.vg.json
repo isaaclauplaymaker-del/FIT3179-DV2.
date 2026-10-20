@@ -1705,7 +1705,8 @@
               "domain": [
                 0,
                 40
-              ]
+              ],
+              "clamp": true
             }
           },
           "value": "#cbd2cc"

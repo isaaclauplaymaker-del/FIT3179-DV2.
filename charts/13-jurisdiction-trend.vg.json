@@ -234,25 +234,6 @@
       }
     ]
   },
-  "transform": [
-    {
-      "window": [
-        {
-          "op": "rank",
-          "as": "rank"
-        }
-      ],
-      "sort": [
-        {
-          "field": "support",
-          "order": "ascending"
-        }
-      ],
-      "groupby": [
-        "year"
-      ]
-    }
-  ],
   "mark": {
     "type": "line",
     "point": {
@@ -277,26 +258,24 @@
       }
     },
     "y": {
-      "field": "rank",
+      "field": "support",
       "type": "quantitative",
-      "title": "Ordering by support share (1 = lowest)",
+      "title": "Needs additional support (%)",
       "scale": {
         "domain": [
-          1,
-          7
-        ],
-        "reverse": true
+          0,
+          40
+        ]
       },
       "axis": {
         "values": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ]
+          0,
+          10,
+          20,
+          30,
+          40
+        ],
+        "labelExpr": "datum.value + '%'"
       }
     },
     "color": {
@@ -304,7 +283,15 @@
       "type": "nominal",
       "title": "Jurisdiction",
       "scale": {
-        "scheme": "tableau10"
+        "range": [
+          "#506784",
+          "#9a7489",
+          "#aa8c5c",
+          "#71734f",
+          "#7a9b9d",
+          "#805a4b",
+          "#9090a8"
+        ]
       },
       "legend": {
         "columns": 4
@@ -322,10 +309,6 @@
         "field": "year",
         "title": "Year",
         "format": "d"
-      },
-      {
-        "field": "rank",
-        "title": "Order"
       },
       {
         "field": "support",

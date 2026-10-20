@@ -1,53 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Literacy and Numeracy in Australia</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0" defer></script>
-
-    <script src="js/visualisation.js" defer></script>
-</head>
-
-<body>
-<a class="skip-link" href="#national-picture">Skip to the charts</a>
-<main>
-    <header>
-        <p class="eyebrow">EDUCATION IN AUSTRALIA · NAPLAN 2026</p>
-
-        <h1>Literacy and Numeracy in Australia</h1>
-        <h2>Who needs more support?</h2>
-
-        <p class="lead">
-            Where are support needs concentrated, and what do national averages hide?
-            Explore Australian reading and numeracy results across places, year levels
-            and student backgrounds.
-        </p>
-        <p class="audience-note">For Malaysian readers interested in Australian school education.</p>
-        <div class="why-it-matters">
-            <h3>Why these skills matter</h3>
-            <p>Literacy helps students understand information, evaluate ideas and communicate
-            across school subjects. Numeracy helps them apply mathematical knowledge to
-            quantities, measurements and data in everyday situations. Identifying gaps in
-            these skills helps teachers plan the next steps in learning.</p>
-            <p>This story uses Reading as one component of literacy; it does not measure
-            every literacy skill. Its question is where additional support may be needed,
-            rather than what causes the differences.</p>
-        </div>
-        <p>NAPLAN, the National Assessment Program – Literacy and Numeracy, assesses
-        students in Years 3, 5, 7 and 9. “Needs additional support” is an official proficiency
-        category. “Strong or Exceeding” combines the two highest categories. Standards
-        differ by subject and year level.</p>
-    </header>
-
-    <div class="explore-controls">
-        <h2>Explore the story</h2>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Explore reading and numeracy support needs across Australian students, places and backgrounds using NAPLAN results from 2023–2026.">
+<title>Literacy and Numeracy in Australia · Who needs more support?</title><link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/vega@5.30.0" defer></script><script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0" defer></script><script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0" defer></script><script src="js/visualisation.js" defer></script></head>
+<body id="top"><a class="skip-link" href="#national-picture">Skip to the charts</a><div class="masthead"><span>LEARNING IN AUSTRALIA</span><a href="#sources">A data story by Isaac Lau</a></div><main>
+<header class="hero"><div class="hero-copy"><p class="eyebrow">READING · NUMERACY · SUPPORT</p><p class="project-name">Literacy and Numeracy in Australia</p><h1>Who needs<br><em>more support?</em></h1><p class="lead">A national result is a starting point. Look closer at how reading and numeracy performance differs across places, student backgrounds and assessment years.</p><div class="hero-actions"><a class="story-link primary-story-link" href="#national-picture"><span class="compare-icon" aria-hidden="true"><i></i><i></i><i></i></span>Let’s explore</a><a class="state-shortcut" href="#places">Find a state</a></div></div><aside class="hero-stat intro-enter" aria-labelledby="snapshot-title"><p class="eyebrow" id="snapshot-title">THE NATIONAL STARTING POINT</p><p id="hero-context" class="snapshot-context">2026 · Year 9 · Australia</p><p class="headline-value"><span id="hero-reading">11.1</span><span class="unit">%</span></p><p>needed additional support in <strong>Reading</strong>.</p><p class="secondary-stat"><span id="hero-numeracy">11.0</span>% in Numeracy</p><p class="small-note">Source: ACARA NAPLAN. This snapshot follows the assessment year and year level selected below. The two subjects use different proficiency standards.</p></aside></header>
+<div class="intro-context intro-enter"><div><p class="eyebrow">WHY LOOK AT THESE SKILLS?</p><h2>Understanding information.<br>Working with numbers.</h2></div><div><p>Literacy helps people understand and communicate information. Numeracy helps them use quantities, measurements and data in everyday situations. Both support learning across school subjects.</p><p>This story uses <strong>Reading as one part of literacy</strong>. It asks where reported support needs differ; it does not establish what causes those differences.</p><details class="definition"><summary>What is NAPLAN, and what do the categories mean?</summary><p>NAPLAN is Australia’s National Assessment Program – Literacy and Numeracy, taken in Years 3, 5, 7 and 9. These are Australian school year levels, not student ages. The four proficiency categories are Needs additional support, Developing, Strong and Exceeding. Exempt students are reported separately. This page combines Strong and Exceeding in some comparisons; standards differ by subject and year level.</p></details></div></div>
+<nav class="chapter-nav" aria-label="Story chapters"><a href="#national-picture"><span>01</span> The starting point</a><a href="#places"><span>02</span> Places</a><a href="#backgrounds"><span>03</span> Backgrounds</a><a href="#change"><span>04</span> Change</a><a href="#coverage"><span>05</span> The full picture</a></nav>
+<div class="assessment-dock" aria-label="Assessment controls">    <div class="explore-controls">
+        <div class="control-intro"><h3>Choose an assessment</h3><p>Change these at any point as you read.</p></div>
 
         <div class="control">
             <label for="assessment-year">ASSESSMENT YEAR</label>
@@ -78,64 +39,32 @@
         </div>
 
         <button id="reset-filters" class="secondary-button" type="button">Reset filters</button>
-        <p class="control-hint">Hover for values. Click a state mark to follow it.</p>
+        <p class="control-hint">Hover or tap chart marks for details.</p>
     </div>
 
-    <p class="filter-note">
+</div>
+
+<section class="story-chapter" id="national-picture" aria-labelledby="national-picture-title"><div class="chapter-heading"><p class="eyebrow">01 / THE STARTING POINT</p><h2 id="national-picture-title">Begin with the national picture.</h2><p class="section-intro">First, compare year levels. Then look beyond the share needing additional support to see the full distribution of proficiency.</p></div>    <p class="filter-note">
         Captions identify the data shown in each chart.
         Views comparing both subjects retain both subjects.
         ABS population charts remain fixed at 2025.
         Trend charts retain the 2023–2026 comparison window.
     </p>
 
-    <aside class="follow-panel" aria-labelledby="follow-title">
-        <div class="follow-heading">
-            <div><h3 id="follow-title">Follow a state or territory</h3>
-            <p>Select one here or click a state mark in charts 3, 4, 7, 11 or 13.</p></div>
-            <div class="control"><label for="follow-state">STATE OR TERRITORY</label>
-            <select id="follow-state"><option value="All states">All states</option>
-            <option>New South Wales</option><option>Victoria</option><option>Queensland</option>
-            <option>South Australia</option><option>Western Australia</option><option>Tasmania</option>
-            <option>Northern Territory</option><option>Australian Capital Territory</option></select></div>
-        </div>
-        <p id="state-summary" class="state-summary" role="status" aria-live="polite">All states are shown.</p>
-        <p class="follow-hint">The selection stays highlighted across the related charts.
-        The box plot keeps every reported jurisdiction; Tasmania is excluded from the ordering chart throughout.</p>
-    </aside>
-
-    <p id="page-status" role="status">Loading 14 charts…</p>
-
-    <noscript>
-        <p>Please enable JavaScript to view the charts.</p>
-    </noscript>
-
-    <section id="national-picture">
-        <p class="eyebrow">01 / THE NATIONAL PICTURE</p>
-        <h2>How common are support needs?</h2>
-
-        <p class="section-intro">
-            Compare the share needing additional support, then
-            examine how students are distributed across the
-            proficiency categories.
-        </p>
-
-        <div class="chart-grid">
-            <article>
-                <p class="chart-number">CHART 1 · HEATMAP</p>
-                <h3>Which year levels need more support?</h3>
-                <p class="chart-subtitle"></p>
+<p id="page-status" role="status" aria-live="polite">Loading the assessment results…</p><noscript><p>Please enable JavaScript to view the charts. Source links remain available below.</p></noscript><div class="chart-grid"><article class="chart-card">
+                <p class="chart-number">THE STARTING POINT</p>
+                <h3>How do support needs differ by year level?</h3>
+                <p class="chart-subtitle"></p><p class="read-guide">Read across a row to compare Reading and Numeracy. Darker cells mean a higher percentage needing additional support. This uses the same 0–40% colour scale as the state map; use the labels for precise values.</p>
                 <div id="national-chart" class="chart"></div>
                 <p class="chart-note"></p>
                 <p class="source">
                     Source: ACARA NAPLAN national results,
                     2026 release. Values displayed to one decimal place.
                 </p>
-            </article>
-
-            <article>
-                <p class="chart-number">CHART 2 · STACKED BAR</p>
-                <h3>The full proficiency picture</h3>
-                <p class="chart-subtitle"></p>
+            </article><article class="chart-card">
+                <p class="chart-number">BEYOND ONE PERCENTAGE</p>
+                <h3>There is more to the proficiency picture</h3>
+                <p class="chart-subtitle"></p><p class="read-guide">Each bar shows the reported shares across the four proficiency categories and Exempt. Developing is separate from Needs additional support.</p>
                 <div id="proficiency-chart" class="chart"></div>
                 <p class="chart-note"></p>
                 <p class="source">
@@ -143,26 +72,23 @@
                     Published category percentages are retained
                     without normalising.
                 </p>
-            </article>
+            </article></div><p class="chapter-bridge">National percentages combine students across the country. How much does that picture change when we look at places?</p></section><section class="story-chapter" id="places" aria-labelledby="places-title"><div class="chapter-heading"><p class="eyebrow">02 / PLACES</p><h2 id="places-title">Look beyond the national average.</h2><p class="section-intro">A state result combines many communities. Compare jurisdictions first, then look at cities, regional areas and remote communities.</p></div><article class="chart-card wide-chart">
+                <p class="chart-number">ACROSS STATES & TERRITORIES</p>
+                <h3>Where is the reported support share higher?</h3>
+                <p class="chart-subtitle"></p><p class="state-focus-label" data-state-focus="state-map" aria-live="polite">Showing all states</p><p class="read-guide">Darker areas mean higher percentages. Grey means no reported achievement result, not zero. Select a state to see its comparison.</p>
+                <div class="map-story"><div id="state-map" class="chart"></div><aside class="follow-panel" aria-labelledby="follow-title">
+        <div class="follow-heading">
+            <div><h4 id="follow-title">Follow a state or territory</h4>
+            <p>Choose here or select a state on the map.</p></div>
+            <div class="control"><label for="follow-state">STATE OR TERRITORY</label>
+            <select id="follow-state"><option value="All states">All states</option>
+            <option>New South Wales</option><option>Victoria</option><option>Queensland</option>
+            <option>South Australia</option><option>Western Australia</option><option>Tasmania</option>
+            <option>Northern Territory</option><option>Australian Capital Territory</option></select></div>
         </div>
-    </section>
-
-    <section>
-        <p class="eyebrow">02 / DIFFERENCES ACROSS AUSTRALIA</p>
-        <h2>A percentage and a population tell different stories</h2>
-
-        <p class="section-intro">
-            A high support percentage and a large student population
-            answer different questions. These views distinguish
-            achievement percentages from population counts. NSW is New South Wales; VIC is Victoria; QLD is Queensland; SA is South Australia; WA is Western Australia; TAS is Tasmania; NT is Northern Territory; ACT is Australian Capital Territory.
-        </p>
-
-        <div class="chart-grid">
-            <article>
-                <p class="chart-number">CHART 3 · CHOROPLETH MAP</p>
-                <h3>Where is the support percentage higher?</h3>
-                <p class="chart-subtitle"></p>
-                <div id="state-map" class="chart"></div>
+        <p id="state-summary" class="state-summary" role="status" aria-live="polite">All states are shown.</p>
+        <p class="follow-hint">Your choice stays highlighted in the related views. All reported jurisdictions remain in the box plot.</p>
+    </aside></div>
                 <p class="chart-note"></p>
                 <p class="source">
                     Source: ACARA; simplified ABS boundaries via
@@ -170,53 +96,10 @@
                     Fixed 0–40% colour scale. ACT is small; hover
                     for its result.
                 </p>
-            </article>
-
-            <article>
-                <p class="chart-number">
-                    CHART 4 · PROPORTIONAL-SYMBOL MAP
-                </p>
-                <h3>How many students participated?</h3>
-                <p class="chart-subtitle"></p>
-                <div id="participant-map" class="chart"></div>
-                <p class="chart-note"></p>
-                <p class="source">
-                    Source: ACARA. Circle area represents count.
-                    Representative locations are not school locations.
-                    Conic equal-area projection.
-                </p>
-            </article>
-
-            <article>
-                <p class="chart-number">CHART 5 · DORLING CARTOGRAM</p>
-                <h3>Land area is not student population</h3>
-                <p class="chart-subtitle"></p>
-                <div id="enrolment-cartogram" class="chart"></div>
-                <p class="chart-note"></p>
-                <p class="source">
-                    Source: ABS Schools 2025, Map 1 accessible
-                    description. A Dorling cartogram has no
-                    conventional map projection.
-                </p>
-            </article>
-
-            <article>
-                <p class="chart-number">CHART 6 · TREEMAP</p>
-                <h3>The wider school population</h3>
-                <p class="chart-subtitle"></p>
-                <div id="sector-treemap" class="chart"></div>
-                <p class="chart-note"></p>
-                <p class="source">
-                    Source: ABS Schools 2025, Table 1.
-                    Enrolments cover all school year levels.
-                </p>
-            </article>
-        </div>
-
-        <article class="wide-chart">
-            <p class="chart-number">CHART 7 · BOX PLOT</p>
-            <h3>How spread out are state support percentages?</h3>
-            <p class="chart-subtitle"></p>
+            </article><div class="chart-grid"><article class="chart-card">
+            <p class="chart-number">LOOKING AT THE SPREAD</p>
+            <h3>How far apart are the state results?</h3>
+            <p class="chart-subtitle"></p><p class="state-focus-label" data-state-focus="state-distribution" aria-live="polite">Showing all states</p><p class="read-guide">Each dot is a jurisdiction. The box shows the middle half of jurisdiction percentages; the white line is their median. Each jurisdiction has equal weight.</p>
             <div id="state-distribution" class="chart"></div>
             <p class="chart-note"></p>
             <p class="source">
@@ -224,23 +107,10 @@
                 The median of jurisdiction percentages is not the
                 national percentage.
             </p>
-        </article>
-    </section>
-
-    <section>
-        <p class="eyebrow">03 / STUDENT GROUPS</p>
-        <h2>Which differences do averages hide?</h2>
-
-        <p class="section-intro">
-            Remoteness and student backgrounds provide further views
-            of the results. The next comparisons ask whether patterns remain hidden inside state averages. They describe associations, not causes.
-        </p>
-
-        <div class="chart-grid">
-            <article>
-                <p class="chart-number">CHART 8 · CONNECTED DOT PLOT</p>
-                <h3>Support needs across remoteness</h3>
-                <p class="chart-subtitle"></p>
+        </article><article class="chart-card">
+                <p class="chart-number">BEYOND STATE BORDERS</p>
+                <h3>How do cities and remote communities compare?</h3>
+                <p class="chart-subtitle"></p><p class="read-guide">Each row compares Reading and Numeracy within one remoteness group. The connecting line shows the subject difference, not student movement.</p>
                 <div id="remoteness-chart" class="chart"></div>
                 <p class="chart-note"></p>
                 <p class="source">
@@ -248,25 +118,20 @@
                     Connectors show subject differences, not student
                     movement between groups.
                 </p>
-            </article>
-
-            <article>
-                <p class="chart-number">CHART 9 · DIVERGING BAR</p>
+            </article></div><p class="chapter-bridge">Geography is one way to group the results. Student backgrounds offer another view of the differences inside those averages.</p></section><section class="story-chapter" id="backgrounds" aria-labelledby="backgrounds-title"><div class="chapter-heading"><p class="eyebrow">03 / STUDENT BACKGROUNDS</p><h2 id="backgrounds-title">Look at the students behind the average.</h2><p class="section-intro">Compare gender patterns and parental-education groups. These group-level results describe associations; they cannot predict an individual student’s performance.</p></div><article class="chart-card wide-chart">
+                <p class="chart-number">COMPARING STUDENT GROUPS</p>
                 <h3>Does the gender difference depend on the subject?</h3>
-                <p class="chart-subtitle"></p>
+                <p class="chart-subtitle"></p><p class="read-guide">Right of zero means a higher female share in Strong or Exceeding; left means a higher male share. Differences are percentage points.</p>
                 <div id="gender-chart" class="chart"></div>
                 <p class="chart-note"></p>
                 <p class="source">
                     Source: ACARA, Gender groups.
                     The chart does not test statistical significance.
                 </p>
-            </article>
-        </div>
-
-        <article class="wide-chart">
-            <p class="chart-number">CHART 10 · PARALLEL COORDINATES</p>
-            <h3>Different backgrounds, different proficiency profiles</h3>
-            <p class="chart-subtitle"></p>
+            </article><article class="chart-card wide-chart">
+            <p class="chart-number">PARENTAL EDUCATION</p>
+            <h3>How do proficiency profiles differ?</h3>
+            <p class="chart-subtitle"></p><p class="read-guide">Follow one purple line across the four category axes. Darker shades represent higher parental education. Higher points mean a larger share in that proficiency category. Click a legend label to focus; shift-click adds groups and double-click resets.</p>
             <div id="parent-chart" class="chart"></div>
             <p class="chart-note"></p>
             <p class="source">
@@ -274,62 +139,20 @@
                 Shift-click legend labels to select multiple groups;
                 double-click to reset.
             </p>
-        </article>
-    </section>
-
-    <section>
-        <p class="eyebrow">04 / PARTICIPATION AND CHANGE</p>
-        <h2>Read change alongside participation</h2>
-
-        <p class="section-intro">
-            Participation helps explain the coverage of an assessment.
-            The final views compare results within the measurement
-            series that began in 2023.
-        </p>
-
-        <div class="chart-grid">
-            <article>
-                <p class="chart-number">CHART 11 · BULLET CHART</p>
-                <h3>Participation against the national reference</h3>
-                <p class="chart-subtitle"></p>
-                <div id="participation-chart" class="chart"></div>
-                <p class="chart-note"></p>
-                <p class="source">
-                    Source: ACARA, Participation (%).
-                    Tasmania's participation remains available when
-                    its achievement is suppressed.
-                </p>
-            </article>
-
-            <article>
-                <p class="chart-number">CHART 12 · LINE CHART</p>
-                <h3>National support needs since 2023</h3>
-                <p class="chart-subtitle"></p>
+        </article><p class="chapter-bridge">A difference in one assessment is a snapshot. The next question is whether the patterns have changed across assessment years.</p></section><section class="story-chapter" id="change" aria-labelledby="change-title"><div class="chapter-heading"><p class="eyebrow">04 / CHANGE OVER TIME</p><h2 id="change-title">Has the picture changed since 2023?</h2><p class="section-intro">Explore changes in national support shares, parental-education gaps and state support shares. The comparison begins in 2023, when the current NAPLAN measurement series started. Earlier achievement results are not directly comparable.</p></div><div class="chart-grid"><article class="chart-card">
+                <p class="chart-number">THE NATIONAL TREND</p>
+                <h3>What has changed since 2023?</h3>
+                <p class="chart-subtitle"></p><p class="read-guide">Follow each subject from left to right. These are different annual cohorts in the same year level, not the progress of individual students.</p>
                 <div id="trend-chart" class="chart"></div>
                 <p class="chart-note"></p>
                 <p class="source">
                     Source: ACARA, national overall results.
                     Both subjects use the same percentage scale.
                 </p>
-            </article>
-
-            <article class="wide-chart">
-                <p class="chart-number">CHART 13 · BUMP CHART</p>
-                <h3>How has jurisdiction ordering changed?</h3>
-                <p class="chart-subtitle"></p>
-                <div id="bump-chart" class="chart"></div>
-                <p class="chart-note"></p>
-                <p class="source">
-                    Source: ACARA, jurisdiction overall results.
-                    Read chart 3 alongside this ordering to see
-                    the actual percentages.
-                </p>
-            </article>
-
-            <article>
-                <p class="chart-number">CHART 14 · SLOPE CHART</p>
-                <h3>The parental-education proficiency gap</h3>
-                <p class="chart-subtitle"></p>
+            </article><article class="chart-card">
+                <p class="chart-number">A CLOSER LOOK AT THE GAP</p>
+                <h3>Has the parental-education gap changed?</h3>
+                <p class="chart-subtitle"></p><p class="read-guide">Compare the two groups at each endpoint. A line connects a group’s reported share in 2023 with the selected year; it does not follow the same students.</p>
                 <div id="education-slope" class="chart"></div>
                 <p class="chart-note"></p>
                 <p class="source">
@@ -337,25 +160,67 @@
                     Two parental-education groups are compared;
                     other groups remain available in chart 10.
                 </p>
-            </article>
-        </div>
+            </article></div><article class="chart-card wide-chart">
+                <p class="chart-number">STATE TRENDS</p>
+                <h3>How have state support needs changed?</h3>
+                <p class="chart-subtitle"></p><p class="state-focus-label" data-state-focus="jurisdiction-trend" aria-live="polite">Showing all states</p><p class="read-guide">Follow each line to see the support percentage in each assessment year. Lower means a smaller reported share needing support. Hover over a point for its value. Your state choice stays highlighted here.</p>
+                <div class="control trend-state-control"><label for="trend-state">FOLLOW A STATE OR TERRITORY</label><select id="trend-state"><option value="All states">All states</option><option>New South Wales</option><option>Victoria</option><option>Queensland</option><option>South Australia</option><option>Western Australia</option><option>Tasmania</option><option>Northern Territory</option><option>Australian Capital Territory</option></select></div>
+                <div id="jurisdiction-trend" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ACARA, jurisdiction overall results.
+                    Actual support percentages across the same seven jurisdictions.
+                    Tasmania is excluded throughout because its 2026 result is not reported.
+                </p>
+            </article><p class="chapter-bridge">Before drawing a conclusion, check who is represented in the assessment and how that differs from the wider school population.</p></section><section class="story-chapter" id="coverage" aria-labelledby="coverage-title"><div class="chapter-heading"><p class="eyebrow">05 / THE FULL PICTURE</p><h2 id="coverage-title">Who is represented in these results?</h2><p class="section-intro">Participation describes assessment coverage. Participant counts describe its scale. The final school-population views provide separate context across all year levels.</p></div><div class="chart-grid"><article class="chart-card">
+                <p class="chart-number">WHO TOOK PART?</p>
+                <h3>How complete is the assessment picture?</h3>
+                <p class="chart-subtitle"></p><p class="state-focus-label" data-state-focus="participation-chart" aria-live="polite">Showing all states</p><p class="read-guide">Slate bars show participation percentages. Dark ticks mark the national reference, rather than a target. Compare this coverage with the achievement results.</p>
+                <div id="participation-chart" class="chart"></div>
+                <p class="chart-note"></p><p id="participation-summary" class="selected-detail" role="status" aria-live="polite"></p>
+                <p class="source">
+                    Source: ACARA, Participation (%).
+                    Tasmania's participation remains available when
+                    its achievement is suppressed.
+                </p>
+            </article><article class="chart-card">
+                <p class="chart-number">ASSESSMENT COVERAGE</p>
+                <h3>How many students are represented?</h3>
+                <p class="chart-subtitle"></p><p class="state-focus-label" data-state-focus="participant-map" aria-live="polite">Showing all states</p><p class="read-guide">Circle area shows the reported participant count for the selected assessment. Locations represent states and territories, not individual schools.</p>
+                <div id="participant-map" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ACARA. Circle area represents count.
+                    Representative locations are not school locations.
+                    Conic equal-area projection.
+                </p>
+            </article></div><article class="chart-card wide-chart">
+                <p class="chart-number">THE WIDER SCHOOL POPULATION</p>
+                <h3>Where are Australia’s students enrolled?</h3>
+                <p class="chart-subtitle"></p><p class="read-guide">Slate state shapes have areas proportional to school enrolments. Pale outlines show their geographic locations for reference. This is a non-contiguous cartogram: shapes are resized separately rather than kept touching. M means million; k means thousand.</p>
+                <div id="enrolment-cartogram" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ABS Schools 2025, Map 1 accessible
+                    description. State shapes were prepared in a conic equal-area projection, then scaled so their areas are proportional to enrolments. The pale outlines are geographic reference shapes, not a second enrolment measure.
+                </p>
+            </article><article class="chart-card wide-chart">
+                <p class="chart-number">THE SCHOOL SYSTEM</p>
+                <h3>Which sectors educate these students?</h3>
+                <p class="chart-subtitle"></p><p class="read-guide">Larger rectangles represent more enrolments. This describes the school population, not differences in literacy or numeracy performance between sectors.</p>
+                <div id="sector-treemap" class="chart"></div>
+                <p class="chart-note"></p>
+                <p class="source">
+                    Source: ABS Schools 2025, Table 1.
+                    Enrolments cover all school year levels.
+                </p>
+            </article><p class="chapter-bridge">These population counts provide context; they are not estimates of how many students need support. They are not multiplied by NAPLAN percentages.</p></section><section class="closing" aria-labelledby="closing-title"><p class="eyebrow">WHAT THE RESULTS TELL US</p><h2 id="closing-title">Support needs deserve<br>a closer look.</h2><p>The national percentage describes the overall picture. Comparisons across places and student backgrounds show where reported needs differ. Read those differences alongside participation, and remember that group results do not determine an individual student’s achievement.</p><p id="closing-evidence" class="closing-evidence"></p><a href="#national-picture">Return to the results ↑</a></section>
+<section class="about-story" aria-labelledby="about-story-title"><div><p class="eyebrow">ABOUT THIS VISUALISATION</p><h2 id="about-story-title">The purpose behind<br>the comparisons</h2><p>Designed for general readers in Malaysia interested in Australian school education. No knowledge of coding or NAPLAN is assumed.</p></div><div class="purpose-notes"><div><h3>Why these comparisons?</h3><p>The aim is to help readers identify differences in reported reading and numeracy support needs across Australian places, student backgrounds and assessment years. National results provide the starting point; group comparisons reveal differences within that overall picture.</p></div><div><h3>What data is shown?</h3><p>ACARA NAPLAN results cover 2023–2026, Years 3, 5, 7 and 9, and Reading and Numeracy. ABS school enrolments provide separate 2025 population context. Reading is one component of literacy, and the two sources describe different student populations.</p></div><div><h3>How do the charts help?</h3><p>Heatmaps and proficiency bars compare percentages; maps locate geographic differences; profile and trend charts compare groups and years. The choropleth uses colour for support shares, the participant map uses circle area for counts, and the enrolment cartogram uses state-shape area for population size. Filters change the assessment, while state highlighting connects related views.</p></div></div></section>
+<section class="interpretation"><div><p class="eyebrow">READ THE RESULTS WITH CARE</p><h2>Understanding<br>the comparisons</h2></div><div class="notes-grid"><div><h3>One part of literacy</h3><p>Reading results do not cover every literacy skill. Proficiency standards are specific to the subject and year level.</p></div><div><h3>Different annual cohorts</h3><p>Changes over time compare different students at the same year level. They do not track individual progress.</p></div><div><h3>Missing does not mean zero</h3><p>Suppressed achievement remains missing. Tasmania’s 2026 achievement is not reported because of low participation; its participation data remains visible.</p></div><div><h3>Different populations</h3><p>2025 ABS enrolments cover all school year levels. NAPLAN counts cover the selected assessment. Group differences do not establish their causes.</p></div></div></section>
+<section class="sources" id="sources">
+        <p class="eyebrow">FOLLOW THE EVIDENCE</p><h2>Sources &amp; definitions</h2>
 
-        <div class="closing">
-            <h2>Support needs have more than one dimension</h2>
-            <p>
-                National results, geographic differences, participation
-                and student-group profiles offer different views of
-                literacy and numeracy performance. Interpret them
-                together, while remembering that a group result does
-                not predict an individual student's achievement.
-            </p>
-        </div>
-    </section>
-
-    <section class="sources">
-        <h2>Sources and reporting notes</h2>
-
-        <p>
+        <details><summary>Assessment results · ACARA NAPLAN</summary><p>
             <a href="https://www.acara.edu.au/reporting/national-report-on-schooling-in-australia/naplan-national-results"
                target="_blank" rel="noopener noreferrer">
                 ACARA NAPLAN national results, 2026 release
@@ -369,9 +234,9 @@
             2023–2026, Years 3, 5, 7 and 9, and Reading and Numeracy.
             Percentages are retained to four decimal places and
             displayed to one.
-        </p>
+        </p></details>
 
-        <p>
+        <details><summary>School population · ABS Schools 2025</summary><p>
             <a href="https://www.abs.gov.au/statistics/people/education/schools/2025"
                target="_blank" rel="noopener noreferrer">
                 ABS Schools 2025
@@ -381,9 +246,9 @@
             enrolments and NAPLAN participants are different
             populations and are not multiplied together to estimate
             support headcounts.
-        </p>
+        </p></details>
 
-        <p>
+        <details><summary>Geography · boundaries and licence</summary><p>
             <a href="https://www.geoboundaries.org/api/current/gbOpen/AUS/ADM1/"
                target="_blank" rel="noopener noreferrer">
                 ABS ASGS Edition 3 boundaries via geoBoundaries
@@ -395,12 +260,12 @@
             </a>.
             Embedded outlines are simplified and coordinates rounded.
             Small islands and Other Territories are omitted.
-        </p>
+        </p></details>
 
-        <p>Background: the Australian Curriculum explanations of
+        <details><summary>Learning context · Australian Curriculum</summary><p>Background: the Australian Curriculum explanations of
             <a href="https://www.australiancurriculum.edu.au/curriculum-information/understand-this-general-capability/literacy" target="_blank" rel="noopener noreferrer">Literacy</a> and
             <a href="https://www.australiancurriculum.edu.au/curriculum-information/understand-this-general-capability/numeracy" target="_blank" rel="noopener noreferrer">Numeracy</a>
-            describe their application across learning areas and everyday contexts.</p>
+            describe their application across learning areas and everyday contexts.</p></details>
         <details class="specifications"><summary>Readable chart specifications</summary>
             <p>These JSON files describe the default view: 2026, Year 9, Reading,
             with all states shown. The live controls update the same chart definitions.</p>
@@ -417,7 +282,7 @@
                 <li><a href="charts/10-parent-chart.vg.json">Chart 10: parent chart</a></li>
                 <li><a href="charts/11-participation-chart.vg.json">Chart 11: participation chart</a></li>
                 <li><a href="charts/12-trend-chart.vg.json">Chart 12: trend chart</a></li>
-                <li><a href="charts/13-bump-chart.vg.json">Chart 13: bump chart</a></li>
+                <li><a href="charts/13-jurisdiction-trend.vg.json">Chart 13: jurisdiction trend</a></li>
                 <li><a href="charts/14-education-slope.vg.json">Chart 14: education slope</a></li>
             </ul>
         </details>
@@ -429,17 +294,4 @@
             comparable with the measurement series beginning in 2023.
             Data sources accessed 15 October 2026; curriculum background checked 16 October 2026.
         </p>
-    </section>
-
-    <footer>
-        <p>Isaac Lau · FIT3179 Data Visualisation 2 · Updated 16 October 2026</p>
-        <p>
-            AI acknowledgement: OpenAI ChatGPT assisted with planning,
-            source checking, data preparation, code, debugging and
-            wording. The author is responsible for reviewing and
-            explaining the work.
-        </p>
-    </footer>
-</main>
-</body>
-</html>
+    </section><footer><div><p class="eyebrow">CREATED BY</p><p>Isaac Lau<br>FIT3179 Data Visualisation 2<br>Monash University Malaysia · October 2026</p></div><div><p class="eyebrow">DATA &amp; SPECIFICATIONS</p><p>ACARA NAPLAN · ABS Schools<br>Geography via geoBoundaries</p><a href="#sources">View sources and chart definitions</a></div><div><p class="eyebrow">AI ACKNOWLEDGEMENT</p><p>OpenAI ChatGPT assisted with planning, source checking, data preparation, code, debugging and wording. The author is responsible for reviewing and explaining the work.</p><a href="#top">Back to top ↑</a></div></footer></main></body></html>

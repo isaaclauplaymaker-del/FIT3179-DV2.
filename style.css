@@ -43,3 +43,92 @@ html{scroll-padding-top:190px}.hero-actions{display:flex;align-items:center;flex
 footer p{max-width:60ch}
 
 .trend-state-control{max-width:300px;margin:0 0 20px}.trend-state-control select{width:100%}
+
+/* A small pair of subject icons supports the introduction without encoding data. */
+.subject-intro{display:flex;align-items:center;flex-wrap:wrap;gap:18px}
+.subject-cue{display:inline-flex;align-items:center;gap:7px}
+.topic-icon{display:block;width:22px;height:22px;flex:none}
+.reading-cue{color:var(--reading)}.numeracy-cue{color:var(--numeracy)}
+.support-cue{color:var(--muted);padding-left:18px;border-left:1px solid var(--rule)}
+/* Keep assessment and state highlighting available in the same dock. */
+.assessment-dock .dock-state-control select{width:205px;max-width:100%}
+.assessment-dock .control-intro{flex:1 1 155px}
+.assessment-dock .control-intro p{max-width:28ch}
+/* Supporting details stay available behind three compact disclosure rows. */
+.reference-hub{padding:46px 0 18px}
+.reference-intro{margin-bottom:24px}.reference-intro .eyebrow{margin-bottom:10px}
+.reference-intro h2{font-size:30px;margin-bottom:10px}
+.reference-intro>p:last-child{font-size:14px;color:var(--muted);max-width:65ch}
+.reference-panel{border:1px solid var(--rule);background:var(--surface);margin:0 0 12px;border-radius:5px}
+.reference-panel>summary{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:20px 24px;list-style:none}
+.reference-panel>summary::-webkit-details-marker{display:none}
+.reference-panel>summary::after{content:"+";font-size:25px;font-weight:normal;color:var(--teal);flex:none;line-height:1}
+.reference-panel[open]>summary::after{content:"−"}
+.reference-panel[open]>summary{margin-bottom:0;border-bottom:1px solid var(--rule)}
+.reference-panel>summary:hover{background:#eef2e9}
+.reference-summary-copy{display:block;min-width:0}
+.reference-label{display:block;font-size:16px;line-height:1.4}
+.reference-description{display:block;font-size:13px;font-weight:normal;line-height:1.6;color:var(--muted);margin-top:5px;max-width:65ch}
+.reference-body{padding:26px}
+.reference-body .about-story,.reference-body .interpretation{padding:0;gap:30px}
+.reference-body .about-story h2,.reference-body .interpretation h2{font-size:25px}
+.reference-body .sources{padding:0;border:0}
+.reference-body .sources h2{font-size:25px;margin-bottom:18px}
+.reference-body .sources>details:first-of-type{border-top:0}
+.reference-body .sources>p:last-child{margin-bottom:0}
+.reference-body .purpose-notes>div:first-child{padding-top:0;border-top:0}
+@media(max-width:1000px){.assessment-dock .dock-state-control select{width:190px}.assessment-dock .control-intro{flex-basis:120px}}
+@media(max-width:760px){
+ .assessment-dock .dock-state-control{flex:1 1 180px}
+ .assessment-dock .dock-state-control select{width:100%}
+ .reference-body{padding:22px 18px}
+ .reference-body .about-story,.reference-body .interpretation{gap:20px}
+ .reference-panel>summary{padding:18px}
+ .reference-intro h2{font-size:27px}
+}
+@media print{.reference-panel>.reference-body{display:block!important}.reference-panel>summary::after{display:none}}
+
+/* Small icons signal the meaning of the main chapters. */
+.chapter-symbol{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;margin-bottom:17px;border:1px solid var(--rule);border-radius:50%;color:var(--teal);background:#eaf0e6}
+.chapter-symbol svg{display:block;width:25px;height:25px}
+/* Linked enrolment exploration: the polygon areas remain fixed; emphasis changes. */
+.enrolment-state-control{max-width:310px;margin:0 0 22px}
+.enrolment-state-control select{width:100%}
+.enrolment-explorer{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(245px,1fr);gap:28px;align-items:center}
+.enrolment-explorer .chart{min-width:0}
+.enrolment-detail{border:1px solid var(--rule);border-top:3px solid var(--teal);background:#edf2e8;padding:25px 22px;min-width:0}
+.enrolment-detail-heading{display:flex;align-items:center;gap:13px;margin-bottom:25px}
+.enrolment-detail .eyebrow{font-size:10px;margin-bottom:7px;color:var(--muted)}
+.enrolment-detail h4{font-family:Georgia,serif;font-size:24px;line-height:1.25;margin:0;font-weight:normal}
+.enrolment-state-outline{display:block;flex:none;width:65px;height:65px;color:#607080}
+.enrolment-state-outline[hidden]{display:none}
+.enrolment-count{font-family:Georgia,serif;font-size:clamp(30px,3.2vw,43px);line-height:1.2;margin:0 0 5px;font-variant-numeric:tabular-nums}
+.enrolment-unit{font-size:13px;color:var(--muted);margin-bottom:20px}
+.enrolment-share{font-size:15px;padding-top:17px;border-top:1px solid var(--rule);margin-bottom:20px}
+.enrolment-detail .small-note{margin-bottom:0}
+#enrolment-cartogram .mark-shape path{cursor:pointer;transition:opacity .25s ease,stroke .25s ease}
+#enrolment-cartogram .mark-text text{cursor:pointer}
+.boundary-credit{line-height:1.65}
+@media(max-width:900px){.enrolment-explorer{grid-template-columns:1fr;gap:15px}.enrolment-detail{max-width:650px;width:100%;margin:0 auto 12px}.enrolment-detail-heading{margin-bottom:18px}.enrolment-detail h4{font-size:25px}.enrolment-count{font-size:38px}}
+@media(prefers-reduced-motion:reduce){#enrolment-cartogram .mark-shape path{transition:none}}
+
+.enrolment-outline-wrap{display:inline-flex;flex:none}.enrolment-outline-wrap[hidden]{display:none}
+
+/* Give both subjects equal emphasis in the opening snapshot. */
+.hero-stat{border:1px solid var(--rule);border-radius:16px;background:var(--surface);padding:28px;max-width:410px;width:100%}
+.hero-stat>.eyebrow{font-size:10px;letter-spacing:1.3px;margin-bottom:8px}
+.hero-stat .snapshot-context{font-size:13px;margin-bottom:19px}
+.hero-stat h2{font-size:25px;line-height:1.25;letter-spacing:-.3px;margin-bottom:22px}
+.snapshot-results{display:grid;gap:10px}
+.snapshot-result{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 16px;border-radius:9px}
+.snapshot-reading{color:var(--reading);background:#eaf2ed}
+.snapshot-numeracy{color:var(--numeracy);background:#f8eee5}
+.snapshot-subject{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:bold}
+.snapshot-subject svg{width:22px;height:22px;flex:none}
+.snapshot-value{font:normal 40px/1 Georgia,serif;letter-spacing:-1px;font-variant-numeric:tabular-nums;margin:0;white-space:nowrap}
+.snapshot-unit{font-size:21px;margin-left:3px;letter-spacing:0}
+.hero-stat .snapshot-note{font-size:12px;line-height:1.7;color:var(--muted);margin:20px 0 10px;max-width:none}
+.snapshot-source{font-size:11px;color:var(--muted);margin:0}
+.snapshot-source a{color:inherit}
+@media(max-width:760px){.hero-stat{max-width:460px;padding:24px}}
+@media(max-width:380px){.hero-stat{padding:20px}.snapshot-result{padding:16px 12px}.snapshot-subject{font-size:13px;gap:7px}.snapshot-value{font-size:34px}.snapshot-unit{font-size:18px}}

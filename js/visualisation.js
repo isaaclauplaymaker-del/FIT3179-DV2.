@@ -732,7 +732,7 @@ const chart4 = vl({
     ]
 });
 
-// CHART 5: Dorling cartogram.
+// CHART 5: non-contiguous area cartogram with linked state exploration.
 
 // Non-contiguous area cartogram. Prepared planar coordinates preserve each state's
 // shape. A common area-per-enrolment factor determines every slate polygon area.
@@ -1380,15 +1380,20 @@ const charts = [
 
 // Linked focus changes appearance, never the underlying jurisdiction distribution.
 let selectedState = "All states";
-const linkedChartIds = ["state-map", "participant-map", "state-distribution", "participation-chart", "jurisdiction-trend"];
+const linkedChartIds = ["state-map", "participant-map", "enrolment-cartogram", "state-distribution", "participation-chart", "jurisdiction-trend"];
 const focusTest = "focus_state === 'All states' || datum.state === focus_state";
-for (const spec of [chart3, chart4, chart7, chart11, chart13]) {
+for (const spec of [chart3, chart4, chart5, chart7, chart11, chart13]) {
     spec.params = [...(spec.params || []), {name: "focus_state", value: "All states"}];
 }
 chart3.layer[0].encoding.opacity = {condition: {test: "focus_state === 'All states' || datum.properties.STATE_NAME === focus_state", value: 1}, value: 0.35};
 chart3.layer[0].encoding.stroke = {condition: {test: "datum.properties.STATE_NAME === focus_state", value: "#193a3a"}, value: "#f6f3eb"};
 chart3.layer[0].encoding.strokeWidth = {condition: {test: "datum.properties.STATE_NAME === focus_state", value: 3}, value: 1.2};
 chart4.layer[1].encoding.opacity = {condition: {test: focusTest, value: 0.85}, value: 0.18};
+// Highlight prepared polygons without changing their count-proportional areas.
+chart5.layer[1].encoding.opacity = {condition: {test: "focus_state === 'All states' || datum.properties.state === focus_state", value: 1}, value: 0.2};
+chart5.layer[1].encoding.stroke = {condition: {test: "datum.properties.state === focus_state", value: "#193a3a"}, value: "#fffdf7"};
+chart5.layer[1].encoding.strokeWidth = {condition: {test: "datum.properties.state === focus_state", value: 2.5}, value: 1.5};
+for (const layer of chart5.layer.slice(2)) layer.encoding.opacity = {condition: {test: focusTest, value: 1}, value: 0.4};
 chart7.layer[1].encoding.opacity = {condition: {test: focusTest, value: 1}, value: 0.2};
 chart7.layer[1].encoding.size = {condition: {test: "datum.state === focus_state", value: 120}, value: 45};
 chart11.layer[1].encoding.opacity = {condition: {test: focusTest, value: 1}, value: 0.25};
@@ -1421,7 +1426,7 @@ function replaceRows(target, rows) {
 // ==================================================
 
 function prepareCharts(year, grade, subject) {
-    for (const spec of [chart3, chart4, chart7, chart11, chart13]) {
+    for (const spec of [chart3, chart4, chart5, chart7, chart11, chart13]) {
         spec.params.find(p => p.name === "focus_state").value = selectedState;
     }
     // Chart 1: all year levels and both subjects.
@@ -1720,12 +1725,46 @@ function prepareInterface() {
 // 10. RENDER AND UPDATE ALL FOURTEEN CHARTS
 // ==================================================
 
+let lastEnrolmentState = null;
+let enrolmentReveal = null;
+function updateEnrolmentDetail() {
+    const panel = document.getElementById("enrolment-detail");
+    if (!panel) return;
+    const total = enrolmentData.reduce((sum, row) => sum + row.total, 0);
+    const row = enrolmentData.find(row => row.state === selectedState);
+    const outline = document.getElementById("enrolment-state-outline");
+    document.getElementById("enrolment-detail-title").textContent = row ? row.state : "Australia";
+    document.getElementById("enrolment-detail-count").textContent = (row ? row.total : total).toLocaleString("en-AU");
+    document.getElementById("enrolment-detail-share").textContent = row
+        ? `${(row.total / total * 100).toFixed(1)}% of Australia's school enrolments in 2025.`
+        : "Click a state shape or use Highlight a state above to reveal its enrolments.";
+    document.getElementById("enrolment-outline-wrap").hidden = !row;
+    if (row) {
+        // Use the actual prepared polygon as an identification silhouette.
+        const feature = enrolmentScaledShapes.find(d => d.properties.state === row.state);
+        const points = feature.geometry.coordinates[0];
+        const xs = points.map(p => p[0]), ys = points.map(p => p[1]);
+        const minX = Math.min(...xs), minY = Math.min(...ys);
+        const width = Math.max(...xs) - minX, height = Math.max(...ys) - minY;
+        const pad = Math.max(width, height) * 0.08;
+        outline.setAttribute("viewBox", `${minX-pad} ${minY-pad} ${width+pad*2} ${height+pad*2}`);
+        document.getElementById("enrolment-state-path").setAttribute("d", "M" + points.map(p => p.join(",")).join("L") + "Z");
+    }
+    const reduceMotion = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (lastEnrolmentState !== null && lastEnrolmentState !== selectedState && !reduceMotion && typeof panel.animate === "function") {
+        if (enrolmentReveal) enrolmentReveal.cancel();
+        enrolmentReveal = panel.animate(
+            [{opacity: 0, transform: "translateY(10px)"}, {opacity: 1, transform: "translateY(0)"}],
+            {duration: 280, easing: "ease-out"}
+        );
+    }
+    lastEnrolmentState = selectedState;
+}
 function updateStateSummary() {
+ updateEnrolmentDetail();
  const summary=document.getElementById("state-summary");
  if(!summary)return;
  const participation=document.getElementById("participation-summary");
- const trendControl=document.getElementById("trend-state");
- if(trendControl)trendControl.value=selectedState;
  document.querySelectorAll("[data-state-focus]").forEach(label=>{
   const id=label.getAttribute("data-state-focus");
   const suppressed=selectedState==="Tasmania"&&document.getElementById("assessment-year").value==="2026";
@@ -1750,7 +1789,7 @@ async function followState(state) {
     if (rendering || (state !== "All states" && !stateData.some(d=>d.state===state))) return;
     selectedState = state;
     document.getElementById("follow-state").value = state;
-    for (const spec of [chart3,chart4,chart7,chart11,chart13]) spec.params.find(p=>p.name==="focus_state").value=state;
+    for (const spec of [chart3,chart4,chart5,chart7,chart11,chart13]) spec.params.find(p=>p.name==="focus_state").value=state;
     updateStateSummary();
     const results = await Promise.allSettled(linkedChartIds.map(id => {
         const view=activeViews.get(id);
@@ -1761,7 +1800,7 @@ async function followState(state) {
 function connectStateClicks(id,view) {
     if (!linkedChartIds.includes(id)) return;
     view.addEventListener("click", (event,item) => {
-        const state=item?.datum?.properties?.STATE_NAME || item?.datum?.state;
+        const state=item?.datum?.properties?.STATE_NAME || item?.datum?.properties?.state || item?.datum?.state;
         if(stateData.some(d=>d.state===state))followState(state);
     });
 }
@@ -1783,7 +1822,7 @@ async function renderAllCharts() {
     rendering = true;
 
     const controls = [
-        ...document.querySelectorAll(".explore-controls select, .explore-controls button, #follow-state, #trend-state")
+        ...document.querySelectorAll(".explore-controls select, .explore-controls button, #follow-state")
     ];
 
     controls.forEach(select => {
@@ -1874,9 +1913,7 @@ for (const id of [
     );
 }
 
-for (const id of ["follow-state", "trend-state"]) {
-    document.getElementById(id).addEventListener("change", event => followState(event.target.value));
-}
+document.getElementById("follow-state").addEventListener("change", event => followState(event.target.value));
 document.getElementById("reset-filters").addEventListener("click", () => {
     if(rendering) return;
     document.getElementById("assessment-year").value = "2026";
@@ -1899,3 +1936,20 @@ function prepareChapterNavigation(){
  activate("national-picture");
 }
 prepareChapterNavigation();
+
+// Open reference material when an in-page source link points into a closed panel.
+function revealReferenceTarget(hash) {
+    if (!hash || hash === "#") return;
+    const target = document.getElementById(hash.slice(1));
+    if (!target) return;
+    let element = target;
+    while (element) {
+        if (element.tagName === "DETAILS") element.open = true;
+        element = element.parentElement;
+    }
+}
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", () => revealReferenceTarget(link.hash));
+});
+window.addEventListener("hashchange", () => revealReferenceTarget(location.hash));
+revealReferenceTarget(location.hash);

@@ -3071,7 +3071,28 @@
             "title": "School enrolments · 2025",
             "format": ",.0f"
           }
-        ]
+        ],
+        "opacity": {
+          "condition": {
+            "test": "focus_state === 'All states' || datum.properties.state === focus_state",
+            "value": 1
+          },
+          "value": 0.2
+        },
+        "stroke": {
+          "condition": {
+            "test": "datum.properties.state === focus_state",
+            "value": "#193a3a"
+          },
+          "value": "#fffdf7"
+        },
+        "strokeWidth": {
+          "condition": {
+            "test": "datum.properties.state === focus_state",
+            "value": 2.5
+          },
+          "value": 1.5
+        }
       }
     },
     {
@@ -3192,6 +3213,13 @@
         },
         "y2": {
           "field": "labelY"
+        },
+        "opacity": {
+          "condition": {
+            "test": "focus_state === 'All states' || datum.state === focus_state",
+            "value": 1
+          },
+          "value": 0.4
         }
       }
     },
@@ -3324,7 +3352,14 @@
             "title": "School enrolments",
             "format": ",.0f"
           }
-        ]
+        ],
+        "opacity": {
+          "condition": {
+            "test": "focus_state === 'All states' || datum.state === focus_state",
+            "value": 1
+          },
+          "value": 0.4
+        }
       }
     },
     {
@@ -3443,8 +3478,21 @@
         },
         "text": {
           "field": "count"
+        },
+        "opacity": {
+          "condition": {
+            "test": "focus_state === 'All states' || datum.state === focus_state",
+            "value": 1
+          },
+          "value": 0.4
         }
       }
+    }
+  ],
+  "params": [
+    {
+      "name": "focus_state",
+      "value": "All states"
     }
   ]
 }

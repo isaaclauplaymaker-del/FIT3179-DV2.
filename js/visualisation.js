@@ -1807,9 +1807,13 @@ function connectStateClicks(id,view) {
 
 const activeViews = new Map();
 let rendering = false;
+let renderQueued = false;
 
 async function renderAllCharts() {
-    if (rendering) return;
+    if (rendering) {
+        renderQueued = true;
+        return;
+    }
 
     const status = document.getElementById("page-status");
 
@@ -1821,13 +1825,10 @@ async function renderAllCharts() {
 
     rendering = true;
 
-    const controls = [
-        ...document.querySelectorAll(".explore-controls select, .explore-controls button, #follow-state")
-    ];
-
-    controls.forEach(select => {
-        select.disabled = true;
-    });
+    // Keep the focused native dropdown enabled. Disabling it while the
+    // sticky dock is active can make the browser move to its original position.
+    const dock = document.querySelector(".assessment-dock");
+    if (dock) dock.setAttribute("aria-busy", "true");
 
     const year = Number(
         document.getElementById("assessment-year").value
@@ -1851,14 +1852,17 @@ async function renderAllCharts() {
 
         for (const [id, spec] of charts) {
             try {
-                // Release the previous Vega view before replacing it.
-
-                if (activeViews.has(id)) {
-                    activeViews.get(id).finalize();
+                // Render off the page so the visible chart never collapses
+                // while Vega prepares its replacement.
+                const container = document.getElementById(id);
+                const previousView = activeViews.get(id);
+                if (typeof container.getBoundingClientRect === "function") {
+                    const height = container.getBoundingClientRect().height;
+                    if (height > 0) container.style.minHeight = height + "px";
                 }
-
+                const replacement = document.createElement("div");
                 const result = await vegaEmbed(
-                    "#" + id,
+                    replacement,
                     JSON.parse(JSON.stringify(spec)),
                     {
                         actions: false,
@@ -1869,6 +1873,8 @@ async function renderAllCharts() {
                     }
                 );
 
+                container.replaceChildren(replacement);
+                if (previousView) previousView.finalize();
                 activeViews.set(id, result.view);
                 connectStateClicks(id, result.view);
             } catch (error) {
@@ -1890,17 +1896,75 @@ async function renderAllCharts() {
         status.textContent =
             "The selection could not load. Check that the full JavaScript was copied.";
     } finally {
-        controls.forEach(select => {
-            select.disabled = false;
-        });
-
+        if (dock) dock.setAttribute("aria-busy", "false");
         rendering = false;
+        if (renderQueued) {
+            renderQueued = false;
+            await renderAllCharts();
+        }
     }
+}
+
+// A native select in a sticky toolbar can scroll its original layout position
+// into view. Remember the viewport before focus, then undo only automatic
+// movement during that interaction. User scrolling cancels the guard.
+function prepareAssessmentScrollGuard() {
+    const dock = document.querySelector(".assessment-dock");
+    if (!dock || typeof requestAnimationFrame !== "function") return;
+    let saved = null, frame = 0, until = 0;
+    const root = document.documentElement;
+    const isControl = target => target && target.closest("select, button") && dock.contains(target);
+    function cancel() {
+        saved = null;
+        if (frame) cancelAnimationFrame(frame);
+        frame = 0;
+        root.removeAttribute("data-assessment-interaction");
+    }
+    function tick() {
+        frame = 0;
+        if (!saved) return;
+        if (Math.abs(window.scrollY - saved.y) > 1 || Math.abs(window.scrollX - saved.x) > 1) {
+            window.scrollTo({left: saved.x, top: saved.y, behavior: "instant"});
+        }
+        if (rendering) until = performance.now() + 250;
+        if (performance.now() < until) frame = requestAnimationFrame(tick);
+        else root.removeAttribute("data-assessment-interaction");
+    }
+    function schedule() {
+        root.setAttribute("data-assessment-interaction", "");
+        if (!frame) frame = requestAnimationFrame(tick);
+    }
+    dock.addEventListener("pointerdown", event => {
+        if (!isControl(event.target)) return;
+        saved = {x: window.scrollX, y: window.scrollY, control: event.target};
+        until = performance.now() + 500;
+        schedule();
+    }, true);
+    dock.addEventListener("keydown", event => {
+        if (!isControl(event.target) || !["ArrowUp", "ArrowDown", "Enter", " "].includes(event.key)) return;
+        if (!saved || saved.control !== event.target) saved = {x: window.scrollX, y: window.scrollY, control: event.target};
+        until = performance.now() + 500;
+        schedule();
+    }, true);
+    dock.addEventListener("change", event => {
+        if (!isControl(event.target)) return;
+        if (!saved || saved.control !== event.target) saved = {x: window.scrollX, y: window.scrollY, control: event.target};
+        until = performance.now() + 500;
+        schedule();
+    }, true);
+    // Never hold the page when the reader deliberately scrolls or navigates.
+    window.addEventListener("wheel", cancel, {passive: true});
+    window.addEventListener("touchmove", cancel, {passive: true});
+    document.addEventListener("pointerdown", event => { if (!dock.contains(event.target)) cancel(); }, true);
+    document.addEventListener("keydown", event => {
+        if (["Tab", "PageUp", "PageDown", "Home", "End", "Escape"].includes(event.key)) cancel();
+    }, true);
 }
 
 // The HTML script tag uses defer, so the page is available here.
 
 prepareInterface();
+prepareAssessmentScrollGuard();
 
 for (const id of [
     "assessment-year",

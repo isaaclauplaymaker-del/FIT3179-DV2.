@@ -132,3 +132,17 @@ footer p{max-width:60ch}
 .snapshot-source a{color:inherit}
 @media(max-width:760px){.hero-stat{max-width:460px;padding:24px}}
 @media(max-width:380px){.hero-stat{padding:20px}.snapshot-result{padding:16px 12px}.snapshot-subject{font-size:13px;gap:7px}.snapshot-value{font-size:34px}.snapshot-unit{font-size:18px}}
+
+/* Reserve the loading-message row so updates do not shift the story. */
+#page-status{min-height:22px}
+#page-status:empty{display:block}
+
+/* Dynamic chart notes must not make Chrome re-anchor to the sticky controls. */
+html{overflow-anchor:none}
+
+/* Anchor offsets belong to story links, not to focused sticky dropdowns. */
+html{scroll-padding-top:0}
+.story-chapter{scroll-margin-top:220px}
+#sources{scroll-margin-top:200px}
+html[data-assessment-interaction]{scroll-behavior:auto!important}
+@media(max-width:760px){.story-chapter,#sources{scroll-margin-top:175px}}

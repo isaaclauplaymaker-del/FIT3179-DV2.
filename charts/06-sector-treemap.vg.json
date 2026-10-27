@@ -137,7 +137,7 @@
             "value": "bold"
           },
           "fill": {
-            "signal": "datum.id === 'Independent' ? '#193a3a' : 'white'"
+            "signal": "datum.id === 'Independent' ? '#142d4e' : 'white'"
           }
         }
       }
@@ -168,7 +168,7 @@
             "value": 18
           },
           "fill": {
-            "signal": "datum.id === 'Independent' ? '#193a3a' : 'white'"
+            "signal": "datum.id === 'Independent' ? '#142d4e' : 'white'"
           }
         }
       }

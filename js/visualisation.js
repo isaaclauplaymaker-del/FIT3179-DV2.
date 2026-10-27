@@ -30,10 +30,10 @@ const config = {
         labelFontSize: 12,
         titleFontSize: 12,
         titleFontWeight: "normal",
-        labelColor: "#193a3a",
-        titleColor: "#193a3a",
+        labelColor: "#142d4e",
+        titleColor: "#142d4e",
         domain: false,
-        gridColor: "#e1e5dd",
+        gridColor: "#e2eaf3",
         labelPadding: 6,
         titlePadding: 12
     },
@@ -50,7 +50,7 @@ const config = {
     title: {
         anchor: "start",
         fontSize: 14,
-        color: "#193a3a"
+        color: "#142d4e"
     }
 };
 
@@ -443,7 +443,7 @@ const chart1 = vl({
     layer: [
         {
             mark: {
-                type: "rect", stroke: "#f6f3eb",
+                type: "rect", stroke: "#ffffff",
                 strokeWidth: 4, cornerRadius: 3
             },
             encoding: {
@@ -477,7 +477,7 @@ const chart1 = vl({
                         test: "datum.support >= 28",
                         value: "white"
                     },
-                    value: "#193a3a"
+                    value: "#142d4e"
                 }
             }
         }
@@ -592,7 +592,7 @@ const chart3 = vl({
 
             mark: {
                 type: "geoshape",
-                stroke: "#f6f3eb",
+                stroke: "#ffffff",
                 strokeWidth: 1.2
             },
 
@@ -627,7 +627,7 @@ const chart3 = vl({
             data: { values: stateData },
             transform: [{ filter: "datum.abbr !== 'ACT'" }],
             mark: {
-                type: "text", color: "#193a3a",
+                type: "text", color: "#142d4e",
                 fontWeight: "bold", fontSize: 11
             },
             encoding: {
@@ -720,7 +720,7 @@ const chart4 = vl({
             data: { values: stateData },
             transform: [{ filter: "datum.abbr !== 'ACT'" }],
             mark: {
-                type: "text", color: "#193a3a",
+                type: "text", color: "#142d4e",
                 fontWeight: "bold", fontSize: 10, dy: 4
             },
             encoding: {
@@ -747,7 +747,7 @@ const chart5 = vl({
   {data:{values:enrolmentReferenceShapes},mark:{type:"geoshape",fill:"#f0f1e8",stroke:"#d3dbcd",strokeWidth:1},encoding:{tooltip:[{field:"properties.state",title:"Geographic reference"}]}},
   {data:{values:enrolmentScaledShapes},mark:{type:"geoshape",fill:palette.counts,stroke:"#fffdf7",strokeWidth:1.5},encoding:{tooltip:[{field:"properties.state",title:"State / territory"},{field:"properties.total",type:"quantitative",title:"School enrolments · 2025",format:",.0f"}]}},
   {data:{values:enrolmentShapeLabels},mark:{type:"rule",color:"#829c90",strokeWidth:1},encoding:{x:{field:"x",type:"quantitative",axis:null,scale:{domain:[0,650]}},y:{field:"y",type:"quantitative",axis:null,scale:{domain:[470,0]}},x2:{field:"labelX"},y2:{field:"labelY"}}},
-  {data:{values:enrolmentShapeLabels},mark:{type:"text",fontSize:12,fontWeight:"bold",color:"#193a3a",dy:-5},encoding:{x:{field:"labelX",type:"quantitative",axis:null,scale:{domain:[0,650]}},y:{field:"labelY",type:"quantitative",axis:null,scale:{domain:[470,0]}},text:{field:"abbr"},tooltip:[{field:"state",title:"State / territory"},{field:"total",type:"quantitative",title:"School enrolments",format:",.0f"}]}},
+  {data:{values:enrolmentShapeLabels},mark:{type:"text",fontSize:12,fontWeight:"bold",color:"#142d4e",dy:-5},encoding:{x:{field:"labelX",type:"quantitative",axis:null,scale:{domain:[0,650]}},y:{field:"labelY",type:"quantitative",axis:null,scale:{domain:[470,0]}},text:{field:"abbr"},tooltip:[{field:"state",title:"State / territory"},{field:"total",type:"quantitative",title:"School enrolments",format:",.0f"}]}},
   {data:{values:enrolmentShapeLabels},mark:{type:"text",fontSize:11,color:"#52665e",dy:11},encoding:{x:{field:"labelX",type:"quantitative",axis:null,scale:{domain:[0,650]}},y:{field:"labelY",type:"quantitative",axis:null,scale:{domain:[470,0]}},text:{field:"count"}}}
  ]
 });
@@ -834,7 +834,7 @@ const chart6 = {
                     fontWeight: { value: "bold" },
                     fill: {
                         signal:
-                            "datum.id === 'Independent' ? '#193a3a' : 'white'"
+                            "datum.id === 'Independent' ? '#142d4e' : 'white'"
                     }
                 }
             }
@@ -854,7 +854,7 @@ const chart6 = {
                     fontSize: { value: 18 },
                     fill: {
                         signal:
-                            "datum.id === 'Independent' ? '#193a3a' : 'white'"
+                            "datum.id === 'Independent' ? '#142d4e' : 'white'"
                     }
                 }
             }
@@ -896,7 +896,7 @@ const chart7 = vl({
         {
             mark: {
                 type: "point", filled: true, size: 45,
-                color: "#193a3a", opacity: 0.75
+                color: "#142d4e", opacity: 0.75
             },
             encoding: {
                 color: {
@@ -1198,7 +1198,7 @@ const chart11 = vl({
         {
             mark: {
                 type: "tick",
-                color: "#193a3a",
+                color: "#142d4e",
                 thickness: 3,
                 size: 28
             },
@@ -1386,12 +1386,12 @@ for (const spec of [chart3, chart4, chart5, chart7, chart11, chart13]) {
     spec.params = [...(spec.params || []), {name: "focus_state", value: "All states"}];
 }
 chart3.layer[0].encoding.opacity = {condition: {test: "focus_state === 'All states' || datum.properties.STATE_NAME === focus_state", value: 1}, value: 0.35};
-chart3.layer[0].encoding.stroke = {condition: {test: "datum.properties.STATE_NAME === focus_state", value: "#193a3a"}, value: "#f6f3eb"};
+chart3.layer[0].encoding.stroke = {condition: {test: "datum.properties.STATE_NAME === focus_state", value: "#142d4e"}, value: "#ffffff"};
 chart3.layer[0].encoding.strokeWidth = {condition: {test: "datum.properties.STATE_NAME === focus_state", value: 3}, value: 1.2};
 chart4.layer[1].encoding.opacity = {condition: {test: focusTest, value: 0.85}, value: 0.18};
 // Highlight prepared polygons without changing their count-proportional areas.
 chart5.layer[1].encoding.opacity = {condition: {test: "focus_state === 'All states' || datum.properties.state === focus_state", value: 1}, value: 0.2};
-chart5.layer[1].encoding.stroke = {condition: {test: "datum.properties.state === focus_state", value: "#193a3a"}, value: "#fffdf7"};
+chart5.layer[1].encoding.stroke = {condition: {test: "datum.properties.state === focus_state", value: "#142d4e"}, value: "#fffdf7"};
 chart5.layer[1].encoding.strokeWidth = {condition: {test: "datum.properties.state === focus_state", value: 2.5}, value: 1.5};
 for (const layer of chart5.layer.slice(2)) layer.encoding.opacity = {condition: {test: focusTest, value: 1}, value: 0.4};
 chart7.layer[1].encoding.opacity = {condition: {test: focusTest, value: 1}, value: 0.2};

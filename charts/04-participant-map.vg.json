@@ -11,10 +11,10 @@
       "labelFontSize": 12,
       "titleFontSize": 12,
       "titleFontWeight": "normal",
-      "labelColor": "#193a3a",
-      "titleColor": "#193a3a",
+      "labelColor": "#142d4e",
+      "titleColor": "#142d4e",
       "domain": false,
-      "gridColor": "#e1e5dd",
+      "gridColor": "#e2eaf3",
       "labelPadding": 6,
       "titlePadding": 12
     },
@@ -29,7 +29,7 @@
     "title": {
       "anchor": "start",
       "fontSize": 14,
-      "color": "#193a3a"
+      "color": "#142d4e"
     }
   },
   "width": 500,
@@ -1853,7 +1853,7 @@
       ],
       "mark": {
         "type": "text",
-        "color": "#193a3a",
+        "color": "#142d4e",
         "fontWeight": "bold",
         "fontSize": 10,
         "dy": 4

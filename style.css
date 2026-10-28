@@ -231,3 +231,18 @@ footer{color:#53677f;border-color:#d5e1ee}
 @media(max-width:760px){.hero{margin-inline:calc(50% - 50vw);padding:52px 25px 58px;gap:35px;min-height:0}.hero h1{font-size:clamp(48px,10vw,70px)}.hero .lead{font-size:16px;max-width:45ch}.hero-stat{justify-self:start;max-width:460px;width:100%;padding:25px}.hero-illustration{width:340px;right:-85px;bottom:12px}.hero-grid-art span:nth-child(1){right:6%;font-size:70px}.hero-grid-art span:nth-child(3){display:none}.hero .subject-intro{gap:12px;font-size:9px}.hero .support-cue{padding-left:12px}.intro-context{gap:22px;padding:34px 0}.intro-context h2{max-width:none;font-size:28px}.chapter-heading{padding:30px 25px;min-height:0;border-radius:10px}.chapter-heading h2{font-size:32px;max-width:22ch;padding-right:22px}.chapter-heading .section-intro{font-size:13px;padding-right:0;max-width:58ch}.chapter-illustration{width:160px;height:160px;right:-18px;top:12px;opacity:.07}.story-chapter{padding-top:40px}.chart-card{padding:24px 18px}.chart-card h3{font-size:24px}.editorial-chart{display:block}.editorial-chart .chart-content{border:0;padding:20px 0 0}.editorial-chart .chart-intro{padding:0}.chapter-bridge{font-size:19px;padding:7px 12px}.closing{padding:42px 22px;border-radius:11px}.closing>p:not(.eyebrow){font-size:14px}.snapshot-value{font-size:40px}.snapshot-subject{font-size:14px}}
 @media(max-width:450px){.hero{padding-inline:16px}.hero-stat{padding:22px}.snapshot-value{font-size:36px}.snapshot-subject{font-size:13px}.chapter-heading h2{font-size:29px}.chapter-heading{padding:27px 21px}}
 @media print{.hero{margin:0;padding:30px;background:#fff;color:#142d4e;min-height:0}.hero h1,.hero h1 em,.hero .lead,.hero .project-name{color:#142d4e}.hero-illustration,.hero-grid-art,.chapter-illustration{display:none}.chapter-heading{background:#edf4fb}.editorial-chart{display:block}.editorial-chart .chart-content{padding:0;border:0}.closing{background:#fff}.closing h2,.closing>p:not(.eyebrow){color:#142d4e}}
+
+/* Presentation motion stays outside chart scales and page layout. */
+@media (prefers-reduced-motion:no-preference){
+ .hero-copy h1{animation-duration:.48s}
+ .hero-copy .lead{animation-delay:.10s;animation-duration:.48s}
+ .hero-copy .story-link{animation-delay:.18s;animation-duration:.48s}
+ .hero-stat.intro-enter{animation-delay:.22s;animation-duration:.48s}
+ #state-map .mark-shape path,#participant-map .mark-symbol path,
+ #enrolment-cartogram .mark-shape path,#state-distribution .mark-symbol path,
+ #participation-chart .mark-rect path,#jurisdiction-trend .mark-line path,
+ #jurisdiction-trend .mark-symbol path{
+  transition:opacity 200ms ease-out,stroke-width 200ms ease-out;
+ }
+}
+@media print{.chart-card{opacity:1!important;transform:none!important}}

@@ -1686,11 +1686,8 @@ function updateText(year, grade, subject) {
     charts.forEach(([id], i) => {
         const article = document.getElementById(id).closest("article");
 
-        article.querySelector(".chart-subtitle").textContent =
-            captions[i];
-
-        article.querySelector(".chart-note").textContent =
-            notes[i];
+        updateAnimatedText(article.querySelector(".chart-subtitle"), captions[i]);
+        updateAnimatedText(article.querySelector(".chart-note"), notes[i]);
 
         if (i !== 4 && i !== 5) {
             const context = [0,8].includes(i) ? "all year levels" : `Year ${grade}`;
@@ -2017,3 +2014,34 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 });
 window.addEventListener("hashchange", () => revealReferenceTarget(location.hash));
 revealReferenceTarget(location.hash);
+
+// Small presentation effects: values and chart geometry never animate.
+function motionAllowed() {
+    return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+function animateVisible(element, frames, duration) {
+    if (!element || !motionAllowed() || typeof element.animate !== "function") return;
+    const bounds = element.getBoundingClientRect();
+    if (bounds.bottom <= 0 || bounds.top >= window.innerHeight) return;
+    if (element.presentationAnimation) element.presentationAnimation.cancel();
+    element.presentationAnimation = element.animate(frames, { duration, easing: "ease-out" });
+}
+function updateAnimatedText(element, text) {
+    const changed = element.textContent !== "" && element.textContent !== text;
+    element.textContent = text;
+    if (changed) animateVisible(element, [{opacity: .45}, {opacity: 1}], 220);
+}
+function prepareChartReveals() {
+    if (typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            animateVisible(entry.target,
+                [{opacity: .25, transform: "translateY(12px)"},
+                 {opacity: 1, transform: "translateY(0)"}], 420);
+            observer.unobserve(entry.target);
+        });
+    }, {threshold: 0, rootMargin: "0px 0px -35px 0px"});
+    document.querySelectorAll(".chart-card").forEach(card => observer.observe(card));
+}
+prepareChartReveals();
